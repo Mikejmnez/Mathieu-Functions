@@ -63,8 +63,40 @@ a_{2n}A_{0}^{(2n)} = &  qA_{2}^{(2n)}\nonumber\\
 \end{eqnarray}](https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Beqnarray%7D%0Aa_%7B2n%7DA_%7B0%7D%5E%7B%282n%29%7D+%3D+%26++qA_%7B2%7D%5E%7B%282n%29%7D%5Cnonumber%5C%5C%0A%5Cleft%5Ba_%7B2n%7D-4+%5Cright%5DA_%7B2%7D%5E%7B%282n%29%7D+%3D+%26+q%5Cleft%5B+2A_%7B0%7D%5E%7B%282n%29%7D+%2B+A_%7B4%7D%5E%7B%282n%29%7D%5Cright%5D%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5Ctext%7Band%7D%5Cnonumber%5C%5C%0A%5Cleft%5Ba_%7B2n%7D+-+4r%5E2+%5Cright%5DA%5E%7B%282n%29%7D_%7B2r%7D+%3D+%26+q%5Cleft%5BA_%7B2r-2%7D%5E%7B%282n%29%7D+%2B+A_%7B2r%2B2%7D%5E%7B%282n%29%7D+%5Cright%5D%2C+%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bfor%7D%5C%3B%5C%3B+r%5Cgeq2%5Cnonumber%0A%5Cend%7Beqnarray%7D)
 
 
+The above recurrence formula can be written as an eigenvalue problem, with an infinite tridiagonal matrix given by
 
-
+<img src=
+"https://render.githubusercontent.com/render/math?math=%5Clarge+%5Cdisplaystyle+%5Cbegin%7Bequation%7D%0A%5Cbegin%7Bpmatrix%7D%0A++++0+%26+%5Csqrt%7B2%7Dis+%26++%26++%26+%26+%26+%5C%5C%0A++++%5Csqrt%7B2%7Dis+%26+4+%26+is+%26++%26+%26+%26%5C%5C%0A++++%26+is+%26+16+%26+is+%26+%26+%26%5C%5C%0A++++%26+%26+is+%26+36+%26+is+%26+%26%5C%5C%0A++++%26+%26+%26+%5Cddots+%26+%5Cddots+%26+%5Cddots+%26+%5C%5C%0A++++%26+%26+%26+%26+is+%26+4r%5E2+%26+is%5C%5C%0A++++%26+%26+%26+%26+%26+%26+%5Cddots%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2m%7D%5C%5C%0AA_%7B2%7D%5E%7B%282m%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282m%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282m%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282m%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%3D+a_%7B2m%7D%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2m%7D%5C%5C%0AA_%7B2%7D%5E%7B%282m%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282m%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282m%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282m%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%5Cend%7Bequation%7D" 
+alt="\begin{equation}
+\begin{pmatrix}
+    0 & \sqrt{2}is &  &  & & & \\
+    \sqrt{2}is & 4 & is &  & & &\\
+    & is & 16 & is & & &\\
+    & & is & 36 & is & &\\
+    & & & \ddots & \ddots & \ddots & \\
+    & & & & is & 4r^2 & is\\
+    & & & & & & \ddots
+\end{pmatrix}
+\begin{pmatrix}
+\sqrt{2}A_{0}^{2m}\\
+A_{2}^{(2m)}\\
+A_{4}^{(2m)}\\
+A_{6}^{(2m)}\\
+\vdots\\
+A_{2r}^{(2m)}\\
+\vdots
+\end{pmatrix}
+= a_{2m}
+\begin{pmatrix}
+\sqrt{2}A_{0}^{2m}\\
+A_{2}^{(2m)}\\
+A_{4}^{(2m)}\\
+A_{6}^{(2m)}\\
+\vdots\\
+A_{2r}^{(2m)}\\
+\vdots
+\end{pmatrix}
+\end{equation}">
 
 
 
