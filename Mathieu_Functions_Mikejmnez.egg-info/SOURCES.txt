@@ -1,6 +1,7 @@
 README.md
 setup.py
 Mathieu_Functions/__init__.py
+Mathieu_Functions/functions.py
 Mathieu_Functions_Mikejmnez.egg-info/PKG-INFO
 Mathieu_Functions_Mikejmnez.egg-info/SOURCES.txt
 Mathieu_Functions_Mikejmnez.egg-info/dependency_links.txt
