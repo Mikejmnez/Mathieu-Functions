@@ -66,8 +66,9 @@ a_{2n}A_{0}^{(2n)} = &  qA_{2}^{(2n)}\nonumber\\
 The above recurrence formula can be written as an eigenvalue problem, with an infinite tridiagonal matrix given by
 
 <img src=
-"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Bequation%7D%0A%5Cbegin%7Bpmatrix%7D%0A++++0+%26+%5Csqrt%7B2%7Dq+%26++%26++%26+%26+%26+%5C%5C%0A++++%5Csqrt%7B2%7Dq+%26+4+%26+q+%26++%26+%26+%26%5C%5C%0A++++%26+q+%26+16+%26+q+%26+%26+%26%5C%5C%0A++++%26+%26+q+%26+36+%26+q+%26+%26%5C%5C%0A++++%26+%26+%26+%5Cddots+%26+%5Cddots+%26+%5Cddots+%26+%5C%5C%0A++++%26+%26+%26+%26+q+%26+4r%5E2+%26+q%5C%5C%0A++++%26+%26+%26+%26+%26+%26+%5Cddots%0A%5Cend%7Bpmatrix%7D%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2n%7D%5C%5C%0AA_%7B2%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%3D+a_%7B2n%7D%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2n%7D%5C%5C%0AA_%7B2%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%5Cend%7Bequation%7D" 
-alt="\begin{equation}
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cbegin%7Bpmatrix%7D%0A++++0+%26+%5Csqrt%7B2%7Dq+%26++%26++%26+%26+%26+%5C%5C%0A++++%5Csqrt%7B2%7Dq+%26+4+%26+q+%26++%26+%26+%26%5C%5C%0A++++%26+q+%26+16+%26+q+%26+%26+%26%5C%5C%0A++++%26+%26+q+%26+36+%26+q+%26+%26%5C%5C%0A++++%26+%26+%26+%5Cddots+%26+%5Cddots+%26+%5Cddots+%26+%5C%5C%0A++++%26+%26+%26+%26+q+%26+4r%5E2+%26+q%5C%5C%0A++++%26+%26+%26+%26+%26+%26+%5Cddots%0A%5Cend%7Bpmatrix%7D%5C%3B%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2n%7D%5C%5C%0AA_%7B2%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%3D+a_%7B2n%7D%5C%3B%0A%5Cbegin%7Bpmatrix%7D%0A%5Csqrt%7B2%7DA_%7B0%7D%5E%7B2n%7D%5C%5C%0AA_%7B2%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B4%7D%5E%7B%282n%29%7D%5C%5C%0AA_%7B6%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%5C%5C%0AA_%7B2r%7D%5E%7B%282n%29%7D%5C%5C%0A%5Cvdots%0A%5Cend%7Bpmatrix%7D%0A%5Cnonumber%0A%5Cend%7Bequation%7D" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\begin{equation}
 \begin{pmatrix}
     0 & \sqrt{2}q &  &  & & & \\
     \sqrt{2}q & 4 & q &  & & &\\
@@ -76,7 +77,7 @@ alt="\begin{equation}
     & & & \ddots & \ddots & \ddots & \\
     & & & & q & 4r^2 & q\\
     & & & & & & \ddots
-\end{pmatrix}
+\end{pmatrix}\;
 \begin{pmatrix}
 \sqrt{2}A_{0}^{2n}\\
 A_{2}^{(2n)}\\
@@ -86,7 +87,7 @@ A_{6}^{(2n)}\\
 A_{2r}^{(2n)}\\
 \vdots
 \end{pmatrix}
-= a_{2n}
+= a_{2n}\;
 \begin{pmatrix}
 \sqrt{2}A_{0}^{2n}\\
 A_{2}^{(2n)}\\
@@ -96,6 +97,7 @@ A_{6}^{(2n)}\\
 A_{2r}^{(2n)}\\
 \vdots
 \end{pmatrix}
+\nonumber
 \end{equation}">
 
 
