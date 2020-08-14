@@ -17,13 +17,20 @@ def matrix_system(q, N, type='even', period='one'):
         A: ndarray, the square matrix associated with each of the four types
             of simply-periodic Mathieu-functions.
     '''
-    if type is 'even' and period is 'one':
-        d = [(2. * r) ** 2 for r in range(N)]
-        e = q * _np.ones(N - 1)
-        A = _np.diag(d) + _np.diag(e, k=-1) + _np.diag(e, k=1)
-        A[0, 1] = _np.sqrt(2) * A[0, 1]
-        A[1, 0] = A[0, 1]
-
+    if type is 'even':
+        if period is 'one':  # ce_{2n}
+            d = [(2. * r) ** 2 for r in range(N)]
+            e = q * _np.ones(N - 1)
+            A = _np.diag(d) + _np.diag(e, k=-1) + _np.diag(e, k=1)
+            A[0, 1] = _np.sqrt(2) * A[0, 1]
+            A[1, 0] = A[0, 1]
+        elif period is 'two':  # se_{2n+2}
+            pass
+    elif type is 'odd':
+        if period is 'one':  # se_{2n+1}
+            pass
+        elif period is 'two':  # ce_{2n+1}
+            pass
     return A
 
 
@@ -34,11 +41,12 @@ def eig_pairs(A, type='real'):
     '''
     N = len(A[:, 0])  # size of square matrix.
     w, V = _LA.eig(A)  # calculates the eigenvalue
-    V[0, :] = V[0, :] / np.sqrt(2)
-    Fcoeff = []
-    for n in range(N):
-        Fcoeff.append(abs(V[0, n]) / _np.sqrt(2))
-
-    return w, Fcoeff
-
-
+    V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor
+    #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
+    Coeffs = V[0, :]  # first coefficients
+    Coeffs = Coeffs[_np.newaxis, :]
+    for n in range(1, N):
+        coeffs = V[n, :]
+        coeffs = coeffs[_np.newaxis, :]
+        Coeffs = _np.append(Coeffs, coeffs, axis=0)
+    return w, Coeffs
