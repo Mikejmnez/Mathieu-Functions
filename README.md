@@ -105,9 +105,10 @@ When <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+q" 
 alt="q"> is real, the matrix system is symmetric and thus all eigenvalues (**caracteristic values**) <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a_%7B2n%7D" 
-alt="a_{2n}"> are also real. However, when <img src=
+alt="a_{2n}"> are also real. The **eigenvectors** of the matrix are the coefficients of the Fourier series and thus we can
+However, when <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+q%3Dis%2C+%5C%3B+%5Ctext%7Bwith%7D%5C%3Bs%3E0+" 
-alt="q=is, \; \text{with}\;s>0 "> real, the system is not Hermitian and branching occurs (**citations needed here**). Moreover, the eigenvectors of the matrix, are the coefficients of the Fourier series
+alt="q=is, \; \text{with}\;s>0 "> real, the system is not Hermitian and branching occurs (**citations needed here**). In such case, the eigenvalues are no longer **ordered** and additional work must be done to order the resulting **characteristic values** and **Fourier coefficients**. We follow (**Zeiner et al, 2012**) to provide such ordering.
 
 The advantage of the matrix system over the perturbation approach, is the well documented python libraries for determining eigenvalues and eigenvectors, that allow the fast and efficient approximation to Mathieu functions of the first kind ![ce_{n}(q, z), se_{n}(q, z)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+ce_%7Bn%7D%28q%2C+z%29%2C+se_%7Bn%7D%28q%2C+z%29). The greater the order of the matrix, the better the approximation to these functions.
 
