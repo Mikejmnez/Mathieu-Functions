@@ -15,7 +15,7 @@ We focus on **basically periodic** solutions to Mathieu equation that are <img s
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi" 
 alt="\pi"> or <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi" 
-alt="2\pi"> periodic, and that depend on all of a, q and y, with the extra condition that two parameters are related, *i.e.* ![a = a(q)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a+%3D+a%28q%29)[[1]](#1). These solutions are also referred to as **Mathieu's functions of the first kind**, or simply **Mathieu functions**. In the limit of <img src=
+alt="2\pi"> periodic, and that depend on all of a, q and y, with the extra condition that two parameters are related, *i.e.* ![a = a(q)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a+%3D+a%28q%29) [[1]](#1). These solutions are also referred to as **Mathieu's functions of the first kind**, or simply **Mathieu functions**. In the limit of <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+q%5Crightarrow0" 
 alt="q\rightarrow0">, each Mathieu function converges to one of <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Ccos%7B%28ny%29%7D" 
@@ -165,7 +165,7 @@ alt="q"> is real, the matrix system is symmetric and thus all eigenvalues (**car
 alt="a_{2n}"> are real. The **eigenvectors** of the matrix are the coefficients of the Fourier series and thus the method simultaneously determines the Fourier coefficients that approximate ![ce_{n}(q, z), se_{n}(q, z)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+ce_%7Bn%7D%28q%2C+z%29%2C+se_%7Bn%7D%28q%2C+z%29). 
 When <img src=
 "https://render.githubusercontent.com/render/math?math=%5Ctextstyle+q%3Dis%2C+%5C%3B+%5Ctext%7Bwith%7D%5C%3Bs%3E0+" 
-alt="q=is, \; \text{with}\;s>0 "> real, the system is not Hermitian and branching occurs[[3]](#3)[[4]](#4). In such case, the eigenvalues are no longer **ordered** and additional steps are required to provide the correct **characteristic values** and **Fourier coefficients**.
+alt="q=is, \; \text{with}\;s>0 "> real, the system is not Hermitian and branching occurs [[3]](#3)[[4]](#4). In such case, the eigenvalues are no longer **ordered** and additional steps are required to provide the correct **characteristic values** and **Fourier coefficients**.
 
 The advantage of the matrix system over the perturbation approach, is the well documented python libraries for determining eigenvalues and eigenvectors, that allow the fast and efficient approximation to Mathieu functions of the first kind ![ce_{n}(q, z), se_{n}(q, z)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+ce_%7Bn%7D%28q%2C+z%29%2C+se_%7Bn%7D%28q%2C+z%29). The greater the order of the matrix, the better the approximation to these functions.
 
