@@ -41,8 +41,8 @@ There are 4 foundamental classes of simply-periodic solutions to Mathieu equatio
 It satisfies the boundary conditions
 
 <img src=
-"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bdce_%7B2n%7D%28q%2C+y%29%7D%7Bdy%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D%5C%3B%5C%3B+y%3D%5C%7B0%2C+%5Cpi%5C%7D%2C+%5Cnonumber%0A%5Cend%7Bequation%7D" 
-alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bdce_%7B2n%7D%28q%2C+y%29%7D%7Bdy%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D%5C%3B%5C%3B+y%3D%5C%7B0%2C+%5Cpi%5C%7D%2C+%5Cnonumber%0A%5Cend%7Bequation%7D" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
 \begin{equation}
 \dfrac{dce_{2n}(q, y)}{dy}=0, \;\;\;\;\;\;\; \text{at}\;\; y=\{0, \pi\}, \nonumber
 \end{equation}">
@@ -58,10 +58,11 @@ alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\
 It satisfies the boundary conditions
 
 <img src=
-"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bdce_%7B2n%2B1%7D%7D%7Bdy%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+at+%5C%3B%5C%3B+y%3D0%2C++%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+ce_%7B2n%2B1%7D%3D0%2C%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+at%5C%3B%5C%3B%5C%3B+y%3D%5Cpi%5Cnonumber%0A%5Cend%7Bequation%7D%0A" 
-alt="\begin{equation}
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bdce_%7B2n%2B1%7D%7D%7Bdy%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+at+%5C%3B%5C%3B+y%3D0%2C++%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+ce_%7B2n%2B1%7D%3D0%2C%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+at%5C%3B%5C%3B%5C%3B+y%3D%5Cpi%5Cnonumber%0A%5Cend%7Bequation%7D" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\begin{equation}
 \dfrac{dce_{2n+1}}{dy}=0, \;\;\;\;\;\; at \;\; y=0,  \;\;\;\;\;\; \;\;\;\;\;\; ce_{2n+1}=0,\;\;\;\;\;\; at\;\;\; y=\pi\nonumber
-\end{equation}
+\end{equation}">
 ">
 
 3. Odd, **sine elliptic** function, with period ![2\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi).
@@ -72,12 +73,11 @@ alt="\begin{equation}
 It satisfies the boundary conditions
 
 <img src=
-"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0Ase_%7B2n%2B1%7D%3D0+%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D0%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5Ctext%7Band%7D%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Cdfrac%7Bdse_%7B2n%2B1%7D%7D%7Bdy%7D+%3D0%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D%5Cpi%5Cnonumber%0A%5Cend%7Bequation%7D%0A" 
-alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0Ase_%7B2n%2B1%7D%3D0+%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D0%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5Ctext%7Band%7D%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Cdfrac%7Bdse_%7B2n%2B1%7D%7D%7Bdy%7D+%3D0%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D%5Cpi%5Cnonumber%0A%5Cend%7Bequation%7D" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
 \begin{equation}
 se_{2n+1}=0 \;\;\;\; \text{at} \;\; y=0\;\;\;\;\;\;\;\;\;\;\text{and}\;\;\;\;\;\;\;\; \dfrac{dse_{2n+1}}{dy} =0\;\;\;\;\;\; \text{at} \;\; y=\pi\nonumber
-\end{equation}
-">
+\end{equation}">
 
 4. Even, **sine elliptic** function, with period ![\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi).
 
@@ -88,13 +88,11 @@ se_{2n+1}=0 \;\;\;\; \text{at} \;\; y=0\;\;\;\;\;\;\;\;\;\;\text{and}\;\;\;\;\;\
 It satisfies the boundary conditions
 
 <img src=
-"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0Ase_%7B2n%2B2%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D%5C%7B0%2C+%5Cpi%5C%7D%5Cnonumber%0A%5Cend%7Bequation%7D%0A" 
-alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0Ase_%7B2n%2B2%7D%3D0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+%5Ctext%7Bat%7D+%5C%3B%5C%3B+y%3D%5C%7B0%2C+%5Cpi%5C%7D%5Cnonumber%0A%5Cend%7Bequation%7D" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
 \begin{equation}
 se_{2n+2}=0, \;\;\;\;\;\; \text{at} \;\; y=\{0, \pi\}\nonumber
-\end{equation}
-">
-
+\end{equation}">
 
 **cosine** eliptic functions cannot coexist with **sine elliptic** functions, since only one periodic solution is allows, but a second, non-periodic solution can be obtained from each of them. 
 
