@@ -43,6 +43,7 @@ def eig_pairs(A, type='real'):
     w, V = _LA.eig(A)  # calculates the eigenvalue
     V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
+    w, V = order_check(w, V)
     Coeffs = V[0, :]  # first coefficients
     Coeffs = Coeffs[_np.newaxis, :]
     for n in range(1, N):
@@ -50,3 +51,35 @@ def eig_pairs(A, type='real'):
         coeffs = coeffs[_np.newaxis, :]
         Coeffs = _np.append(Coeffs, coeffs, axis=0)
     return w, Coeffs
+
+
+def order_check(a, v):
+    """ Check the ordering of the eigenvalue array, from smaller to larger. If
+    true, return a unchanged. Ordering also matters if a is complex. If a is
+    complex, ordering again is first set according to real(a). If two
+    eigenvalues are complex conjugates, then ordering is in accordance to the
+    sign of complex(a). Negative sign is first.
+    """
+    if a.imag.all() == 0:
+        ordered_a = a
+        nv = v
+    else:
+        Ind = _np.argsort(a)
+        ordered_a = a[Ind]
+        nv = v[Ind, :]
+    return ordered_a, nv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
