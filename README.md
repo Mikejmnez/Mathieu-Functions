@@ -1,22 +1,35 @@
 # Mathieu Functions of the first kind
 
-Mathieu functions of first kind are those which are simply periodic, with period either ![\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi) or ![2\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi), that satisfy the equation
+Mathieu functions of first kind are those which are (simply) periodic, with period either ![\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi) or ![2\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi), and satisfy the periodic differential (Mathieu's) equation
 
-![\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+<img src=
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bd%5E2f%7D%7Bdy%5E2%7D+%2B+%5Cleft%5Ba-2q%5Ccos%7B%282y%29%7D+%5Cright%5Df+%3D+0%2C+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+0%5Cleq+y%5Cleq+2%5Cpi+%5Cnonumber%0A%5Cend%7Bequation%7D%0A" 
+alt="\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
 \begin{equation}
-\dfrac{d^2f}{dy^2} + \left[a-2q\cos{(2y)} \right]f = 0 \nonumber
-\end{equation}](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%0A%5Cbegin%7Bequation%7D%0A%5Cdfrac%7Bd%5E2f%7D%7Bdy%5E2%7D+%2B+%5Cleft%5Ba-2q%5Ccos%7B%282y%29%7D+%5Cright%5Df+%3D+0+%5Cnonumber%0A%5Cend%7Bequation%7D)
+\dfrac{d^2f}{dy^2} + \left[a-2q\cos{(2y)} \right]f = 0, \;\;\;\;\;\;\;\;\;\; 0\leq y\leq 2\pi \nonumber
+\end{equation}
+">
 
 
-characterized by the coefficient being periodic over the domain. There are two
-free parameters, namely q and a, and in the case of simply periodic the *characteristic number* ![a = a(q)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a+%3D+a%28q%29), resulting in a necessary condition for the existance of simply periodic solutions. In other words, ![f(q, y)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+f%28q%2C+y%29) is a solution of (1) whenever ![a = a(q)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a+%3D+a%28q%29) has finite, unique values.
+Mathieu's equation is the simplest case of a Hill's equation, a general 2nd order ODE with periodic coefficients. Here, we are interested in **basically periodic** solutions to Mathieu equation, which are pi or 2pi periodic, which depend on both a, q and y, but such a solution can only exist when a the two parameters are related, *i.e.* ![a = a(q)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a+%3D+a%28q%29) [[1]](#1). These solutions are also referred to as **Mathieu's functions of the first kind**, or simply **Mathieu functions**. In the limit of <img src=
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+q%5Crightarrow0" 
+alt="q\rightarrow0">, each Mathieu function converges to one of <img src=
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Ccos%7B%28ny%29%7D" 
+alt="\cos{(ny)}"> or <img src=
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Csin%7B%28ny%29%7D" 
+alt="\sin{(ny)}">, where <img src=
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+a%3Dn%5E2" 
+alt="a=n^2">, n an integer, as Mathieu's equation becomes the string equation. Following now standard notation, Mathieu's functions are written as <img src=
+"https://render.githubusercontent.com/render/math?math=%5Ctextstyle+ce_%7Bn%7D%28q%2C+y%29%2C+se_%7Bn%7D%28q%2C+y%29" 
+alt="ce_{n}(q, y), se_{n}(q, y)">, and usually referred to as **cosine elliptic** or **sine elliptic** functions [[2]](#2).
 
 
-According to Floquet theory, Mathieu's equation can only one periodic solution, which can be either even or odd, ![\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi) or ![2\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi) periodic. With this in mind, there are 4 classes of identifyble (simply periodic) solutions to Mathieu equation, in accordance to these properties. These are
+There are 4 foundamental classes of simply-periodic solutions to Mathieu equation, each associated with a periodicity and symmetry relation, and consequenly each one satisfies a different combination of boundary conditions. These are:
 
 1. Even, **cosine elliptic** function, with period ![\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+%5Cpi).
 
 ![\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; ce_{2n}(z,q) = \sum_{r=0}^{\infty}A_{2r}^{(2n)}(q)\cos{(2rz)}](https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B%5C%3B+ce_%7B2n%7D%28z%2Cq%29+%3D+%5Csum_%7Br%3D0%7D%5E%7B%5Cinfty%7DA_%7B2r%7D%5E%7B%282n%29%7D%28q%29%5Ccos%7B%282rz%29%7D)
+
 
 
 2. Odd, **Cosine elliptic** function, with period ![2\pi](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+2%5Cpi).
@@ -111,6 +124,20 @@ However, when <img src=
 alt="q=is, \; \text{with}\;s>0 "> real, the system is not Hermitian and branching occurs (**citations needed here**). In such case, the eigenvalues are no longer **ordered** and additional work must be done to order the resulting **characteristic values** and **Fourier coefficients**. We follow (**Zeiner et al, 2012**) to provide such ordering.
 
 The advantage of the matrix system over the perturbation approach, is the well documented python libraries for determining eigenvalues and eigenvectors, that allow the fast and efficient approximation to Mathieu functions of the first kind ![ce_{n}(q, z), se_{n}(q, z)](https://render.githubusercontent.com/render/math?math=%5Ctextstyle+ce_%7Bn%7D%28q%2C+z%29%2C+se_%7Bn%7D%28q%2C+z%29). The greater the order of the matrix, the better the approximation to these functions.
+
+
+## References
+<a id="1">[1]</a> 
+Arscott, F. M. (1964). 
+Periodic differential equations: an introduction to Mathieu, Lame, and allied functions.
+International series of monographs of pure and applied mathiematics.
+Volume 66.
+Pergamon Press.
+
+<a id="2">[2]</a> 
+Whittaker, E. T. (1903).
+A course in modern analysis.
+Cambridge University Press.
 
 
 
