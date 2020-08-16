@@ -79,7 +79,7 @@ def sign_check(V):
     Input:
         V is matrix of eigenvectors V[:, i].
     """
-    N = _np.shape(V[:, 0])  # size of (square) matrix
+    N = len(V[:, 0])  # size of (square) matrix
     for n in range(N):
         for k in range(1, N):
             if _np.sign(V[n, k].real) != _np.sign(V[n, k - 1]):
