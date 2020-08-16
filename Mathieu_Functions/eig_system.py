@@ -44,7 +44,6 @@ def eig_pairs(A):
     V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
     ord_w, V = order_check(w, V)
-    nV = sign_check(V)
     Coeffs = nV[:, 0]  # first coefficients
     Coeffs = Coeffs[_np.newaxis, :]
     for n in range(1, N):
@@ -69,19 +68,3 @@ def order_check(a, v):
         ordered_a = a[Ind]
         nv = v[Ind, :]
     return ordered_a, nv
-
-
-def sign_check(V):
-    """
-    Makes sure eigenvectors are continuous. Numerical rutines for estimating
-    eigenvectors might converge in different signs for the eigenvectors for
-    different parameter q (real or purely imaginary).
-    Input:
-        V is matrix of eigenvectors V[:, i].
-    """
-    N = len(V[:, 0])  # size of (square) matrix
-    for n in range(N):
-        for k in range(1, N):
-            if _np.sign(V[n, k].real) != _np.sign(V[n, k - 1]):
-                V[n, k] = - V[n, k]
-    return V

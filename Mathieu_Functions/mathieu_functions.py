@@ -29,6 +29,7 @@ class mathieu_functions:
         """
         a, As = eig_pairs(matrix_system(q, N))
         vals = {}
+        l = len(q)
         for n in range(N):
             vals.update({'a' + str(2 * n): a[n]})
             if debug:
@@ -38,3 +39,17 @@ class mathieu_functions:
                 ce = ce + As[n, k] * _np.cos((2 * k) * x)
             vals.update({'ce' + str(2 * n): ce})
         return vals
+
+
+def sign_check(A):
+    """
+    Makes sure Fourier coefficients are continuous. Numerical rutines for
+    estimating eigenvectors might converge in different signs for the
+    eigenvectors for different parameter q (real or purely imaginary).
+    Input:
+        A Fourier coefficient as a function of parameter q.
+    """
+    for n in range(1, len(A)):
+        if _np.sign(A[n].real) != _np.sign(A[n - 1]):
+            A[n] = - A[n]
+    return A
