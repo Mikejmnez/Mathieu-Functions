@@ -34,23 +34,24 @@ def matrix_system(q, N, type='even', period='one'):
     return A
 
 
-def eig_pairs(A, type='real'):
+def eig_pairs(A):
     ''' Calculates the characteristic value (eigenvalue) and the Fourier
     coefficients associated with the Mathieu function. Both the eigenvalues
     and Fourier coefficients are given in ascending order.
     '''
     N = len(A[:, 0])  # size of square matrix.
     w, V = _LA.eig(A)  # calculates the eigenvalue
-    V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor
+    V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
-    w, V = order_check(w, V)
-    Coeffs = V[0, :]  # first coefficients
+    ord_w, V = order_check(w, V)
+    nV = sign_check(V)
+    Coeffs = nV[:, 0]  # first coefficients
     Coeffs = Coeffs[_np.newaxis, :]
     for n in range(1, N):
-        coeffs = V[n, :]
+        coeffs = nV[:, n]
         coeffs = coeffs[_np.newaxis, :]
         Coeffs = _np.append(Coeffs, coeffs, axis=0)
-    return w, Coeffs
+    return ord_w, Coeffs
 
 
 def order_check(a, v):
@@ -60,26 +61,27 @@ def order_check(a, v):
     eigenvalues are complex conjugates, then ordering is in accordance to the
     sign of complex(a). Negative sign is first.
     """
-    if a.imag.all() == 0:
+    if a.imag.any() == 0:
         ordered_a = a
         nv = v
     else:
-        Ind = _np.argsort(a)
+        Ind = _np.argsort(_np.round(a, 5))  # sorting through 5 decimals
         ordered_a = a[Ind]
         nv = v[Ind, :]
     return ordered_a, nv
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+def sign_check(V):
+    """
+    Makes sure eigenvectors are continuous. Numerical rutines for estimating
+    eigenvectors might converge in different signs for the eigenvectors for
+    different parameter q (real or purely imaginary).
+    Input:
+        V is matrix of eigenvectors V[:, i].
+    """
+    N = _np.shape(V[:, 0])  # size of (square) matrix
+    for n in range(N):
+        for k in range(1, N):
+            if _np.sign(V[n, k].real) != _np.sign(V[n, k - 1]):
+                V[n, k] = - V[n, k]
+    return V
