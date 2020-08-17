@@ -1,8 +1,9 @@
 """
 defines a class where the Mathieu functions ce and se are defined.
 """
-import numpy as _np
 from eig_system import matrix_system, eig_pairs
+from math import factorial
+import numpy as _np
 
 
 class mathieu_functions:
@@ -72,3 +73,37 @@ def sign_check(A0, A1):
         if _np.sign(A[n].real) != _np.sign(A[n - 1]):
             A[n] = - A[n]
     return A
+
+
+
+def limit_coeff(n, A, q):
+    """
+    Checks that the sign of the eigenvector components matches the sign of the
+    Fourier coefficients associated with each eigenvalue with index n, and given (real or purely imaginary) parameter q.
+    Input:
+        n: int. position (index) of eigenvalue.
+        A: 1-d array. Eigenvector associated with eigenvalue a_{n}.
+        q: float, purely real or purely imaginary
+    """
+    pass
+
+
+def coeff0(q, r):
+    ''' Fouerier coefficients associated with zeroth-eigenvalue, valid only
+    when |q| << 1. These are used to check the correct sign of the numerically
+    calculate eigenvectors components as a function of q.
+    '''
+    if r == 0:
+        coeff = 1 / np.sqrt(2)
+    else:
+        coeff = np.sqrt(2)*((-q)**r)/((4**r)*(factorial(r)**2))
+    return coeff
+
+
+
+
+
+
+
+
+
