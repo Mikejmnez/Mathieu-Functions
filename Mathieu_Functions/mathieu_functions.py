@@ -94,9 +94,9 @@ def coeff0(q, r):
     calculate eigenvectors components as a function of q.
     '''
     if r == 0:
-        coeff = 1 / np.sqrt(2)
+        coeff = 1 / _np.sqrt(2)
     else:
-        coeff = np.sqrt(2)*((-q)**r)/((4**r)*(factorial(r)**2))
+        coeff = _np.sqrt(2)*((-q)**r)/((4**r)*(factorial(r)**2))
     return coeff
 
 
