@@ -61,7 +61,7 @@ class mathieu_functions:
         return vals
 
 
-def Fcoeffs(As, n=0, q=0.0001):
+def Fcoeffs(As, n=0, q=0.00001):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
     routines for estimating eigenvectors might converge in different signs
@@ -79,7 +79,7 @@ def Fcoeffs(As, n=0, q=0.0001):
     # Estimate limiting value for small q (pos or neg) and correct.
     for k in range(len(As[0, :])):
         limA = coeff0(q, k)  # limiting value for each entry of eigenvector.
-        if _np.sign(limA) == 0:
+        if _np.sign(As[0, k]) == 0:
             As[0, k] = limA  # limiting value of coeff for small q
         else:
             if _np.sign(limA) != _np.sign(As[0, k]):
