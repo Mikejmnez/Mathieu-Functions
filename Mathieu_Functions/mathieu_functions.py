@@ -4,7 +4,7 @@ defines a class where the Mathieu functions ce and se are defined.
 from eig_system import matrix_system, eig_pairs
 from math import factorial
 import numpy as _np
-
+from numpy.linalg import norm as _norm
 
 class mathieu_functions:
 
@@ -84,10 +84,14 @@ def Fcoeffs(As, n=0, q=0.00001):
         else:
             if _np.sign(limA) != _np.sign(As[0, k]):
                 As[0, k] = -As[0, k]
+    l2_norm = _norm(As[0, :])
+    As[0, :] = As[0, :] / l2_norm
     for k in range(1, len(As[:, 0])):
         for m in range(len(As[0, :])):
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
                 As[k, m] = - As[k, m]
+        l2_norm = _norm(As[k, :])
+        As[k, :] = As[k, :] / l2_norm
     return As
 
 
