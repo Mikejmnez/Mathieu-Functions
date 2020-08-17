@@ -27,27 +27,46 @@ class mathieu_functions:
         q (which can be real or purely imaginary), the characteristic number
         `a`, and the domain.
         """
-        a, As = eig_pairs(matrix_system(q, N))
         vals = {}
-        l = len(q)
         for n in range(N):
-            vals.update({'a' + str(2 * n): a[n]})
-            if debug:
-                vals.update({'A' + str(2 * n): As[n, :]})
-            ce = As[n, 0]
-            for k in range(1, N):
-                ce = ce + As[n, k] * _np.cos((2 * k) * x)
-            vals.update({'ce' + str(2 * n): ce})
+            a, As = eig_pairs(matrix_system(q[0], N))
+            a = [a[n]]  # makes a list of the nth eigenvalue
+            As = As[_np.newaxis, :, n]
+            for k in range(1, len(q)):
+                an, nAs = eig_pairs(matrix_system(q[k], N))
+                a.append(an[n])
+                nAs = nAs[_np.newaxis, :, n]
+                As = _np.append(As, nAs, axis=0)
+            As = Fcoeffs(As)
+            vals.update({'a' + str(2 * n): _np.array(a)})
+            vals.update({'A' + str(2 * n): As})
+            # ce = As[n, 0]
+            # for k in range(1, N):
+            #     ce = ce + As[n, k] * _np.cos((2 * k) * x)
+            # vals.update({'ce' + str(2 * n): ce})
         return vals
 
 
-def sign_check(A):
+def Fcoeffs(As):
+    """ Returns the Fourier coefficient of the Mathieu functions for given
+    parameter q.
+        Output:
+            Dictionary.
+    """
+    for k in range(1, len(As[:, 0])):
+        for n in range(len(As[0, :])):
+            if _np.sign(As[k, n]) != _np.sign(As[k - 1, n]):
+                As[k, n] = - As[k, n]
+    return As
+
+
+def sign_check(A0, A1):
     """
     Makes sure Fourier coefficients are continuous. Numerical rutines for
     estimating eigenvectors might converge in different signs for the
     eigenvectors for different parameter q (real or purely imaginary).
     Input:
-        A Fourier coefficient as a function of parameter q.
+        Dictionary .
     """
     for n in range(1, len(A)):
         if _np.sign(A[n].real) != _np.sign(A[n - 1]):

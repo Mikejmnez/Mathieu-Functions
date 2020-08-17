@@ -44,10 +44,10 @@ def eig_pairs(A):
     V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
     ord_w, V = order_check(w, V)
-    Coeffs = nV[:, 0]  # first coefficients
+    Coeffs = V[:, 0]  # first coefficients
     Coeffs = Coeffs[_np.newaxis, :]
     for n in range(1, N):
-        coeffs = nV[:, n]
+        coeffs = V[:, n]
         coeffs = coeffs[_np.newaxis, :]
         Coeffs = _np.append(Coeffs, coeffs, axis=0)
     return ord_w, Coeffs
