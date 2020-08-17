@@ -38,7 +38,7 @@ class mathieu_functions:
                 a.append(an[n])
                 nAs = nAs[_np.newaxis, :, n]
                 As = _np.append(As, nAs, axis=0)
-            As = Fcoeffs(As)
+            As = Fcoeffs(As, n)
             vals.update({'a' + str(2 * n): _np.array(a)})
             vals.update({'A' + str(2 * n): As})
         # initialize the coefficients (q=0)
@@ -61,62 +61,36 @@ class mathieu_functions:
         return vals
 
 
-def Fcoeffs(As):
+def Fcoeffs(As, n=0, q=0.01):
     """ Returns the Fourier coefficient of the Mathieu functions for given
-    parameter q.
+    parameter q. Makes sure the coefficients are continuous (in q). Numerical
+    routines for estimating eigenvectors might converge in different signs
+    for the eigenvectors for different (neighboring) values of q.
+        Input:
+            As: 1d array. Eigenvector shape(As)=Nq, N, as a function of q and
+                containing N entries, each associated with a Fourier
+                coefficient.
+            n: int. Eigenvalue index. If n=0, eigenvalue is a0. n=1, eigenvalue
+            is a2.
+            q: float, real or imag. Default is q=0.01, real. Must be small.
         Output:
-            Dictionary.
+            Corrected Eigenvector with same shape as original
     """
+    # Estimate limiting value for small q (pos or neg) and correct.
     for k in range(1, len(As[:, 0])):
-        for n in range(len(As[0, :])):
-            if _np.sign(As[k, n]) != _np.sign(As[k - 1, n]):
-                As[k, n] = - As[k, n]
+        for m in range(len(As[0, :])):
+            if _np.sign(As[m, n]) != _np.sign(As[m - 1, n]):
+                As[m, n] = - As[m, n]
     return As
 
 
-def sign_check(A0, A1):
-    """
-    Makes sure Fourier coefficients are continuous. Numerical rutines for
-    estimating eigenvectors might converge in different signs for the
-    eigenvectors for different parameter q (real or purely imaginary).
-    Input:
-        Dictionary .
-    """
-    for n in range(1, len(A)):
-        if _np.sign(A[n].real) != _np.sign(A[n - 1]):
-            A[n] = - A[n]
-    return A
-
-
-
-def limit_coeff(n, A, q):
-    """
-    Checks that the sign of the eigenvector components matches the sign of the
-    Fourier coefficients associated with each eigenvalue with index n, and given (real or purely imaginary) parameter q.
-    Input:
-        n: int. position (index) of eigenvalue.
-        A: 1-d array. Eigenvector associated with eigenvalue a_{n}.
-        q: float, purely real or purely imaginary
-    """
-    pass
-
-
 def coeff0(q, r):
-    ''' Fouerier coefficients associated with zeroth-eigenvalue, valid only
-    when |q| << 1. These are used to check the correct sign of the numerically
-    calculate eigenvectors components as a function of q.
+    ''' Limiting value of Fouerier coefficients associated with zeroth
+    eigenvalue, for |q| << 1. These are used to check the correct sign of
+    the numerically calculate eigenvectors components as a function of q.
     '''
-    if r == 0:
+    if r == 0:  # first coefficient
         coeff = 1 / _np.sqrt(2)
     else:
-        coeff = _np.sqrt(2)*((-q)**r)/((4**r)*(factorial(r)**2))
+        coeff = ((-q) ** r) / ((4 ** r) * (factorial(r) ** 2))
     return coeff
-
-
-
-
-
-
-
-
-
