@@ -41,10 +41,15 @@ class mathieu_functions:
             As = Fcoeffs(As)
             vals.update({'a' + str(2 * n): _np.array(a)})
             vals.update({'A' + str(2 * n): As})
-            # ce = As[n, 0]
-            # for k in range(1, N):
-            #     ce = ce + As[n, k] * _np.cos((2 * k) * x)
-            # vals.update({'ce' + str(2 * n): ce})
+        # initialize the coefficients (q=0)
+        for n in range(N // 4 + 1):
+            vals['ce' + str(2 * n)] = 0
+            terms = [_np.cos((2 * k) * x) * (vals['A' + str(2 * n)][0, k])
+                     for k in range(N // 4 + 1)]
+            vals.update({'ce' + str(2 * n): (vals['ce' + str(2 * n)]) +
+                         + _np.sum(terms, axis=0)})
+            vals.update({'ce' + str(2 * n):
+                         vals['ce' + str(2 * n)][_np.newaxis, :]})
         return vals
 
 
