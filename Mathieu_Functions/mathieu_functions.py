@@ -28,35 +28,37 @@ class mathieu_functions:
         `a`, and the domain.
         """
         vals = {}
-        for n in range(N):
-            a, As = eig_pairs(matrix_system(q[0], N))
+        for n in range(N // 2 + 1):
+            a, A = eig_pairs(matrix_system(q[0], N))
             a = [a[n]]  # makes a list of the nth eigenvalue
-            As = As[_np.newaxis, :, n]
+            As = A[:, n]
+            As = As[_np.newaxis, :]
             for k in range(1, len(q)):
-                an, nAs = eig_pairs(matrix_system(q[k], N))
+                an, A = eig_pairs(matrix_system(q[k], N))
                 a.append(an[n])
-                nAs = nAs[_np.newaxis, :, n]
+                nA = A[:, n]
+                nAs = nA[_np.newaxis, :]
                 As = _np.append(As, nAs, axis=0)
             As = Fcoeffs(As, n)
             vals.update({'a' + str(2 * n): _np.array(a)})
             vals.update({'A' + str(2 * n): As})
         # initialize the coefficients (q=0)
-        for n in range(N // 4 + 1):
-            vals['ce' + str(2 * n)] = 0
-            terms = [_np.cos((2 * k) * x) * (vals['A' + str(2 * n)][0, k])
-                     for k in range(N // 4 + 1)]
-            vals.update({'ce' + str(2 * n): (vals['ce' + str(2 * n)]) +
-                         + _np.sum(terms, axis=0)})
-            vals.update({'ce' + str(2 * n):
-                         vals['ce' + str(2 * n)][_np.newaxis, :]})
-        for i in range(1, len(q)):
-            for n in range(N // 4 + 1):
-                terms = [_np.cos((2*k)*x)*(vals['A'+str(2*n)][i-1, k])
-                         for k in range(N // 4 + 1)]
-                ce = vals['ce' + str(2 * n)][i - 1, :] + _np.sum(terms, axis=0)
-                ce = ce[_np.newaxis, :]
-                ce = _np.append(vals['ce' + str(2 * n)], ce, axis=0)
-                vals.update({'ce' + str(2 * n): ce})
+        # for n in range(N // 4 + 1):
+        #     vals['ce' + str(2 * n)] = 0
+        #     terms = [_np.cos((2 * k) * x) * (vals['A' + str(2 * n)][0, k])
+        #              for k in range(N // 4 + 1)]
+        #     vals.update({'ce' + str(2 * n): (vals['ce' + str(2 * n)]) +
+        #                  + _np.sum(terms, axis=0)})
+        #     vals.update({'ce' + str(2 * n):
+        #                  vals['ce' + str(2 * n)][_np.newaxis, :]})
+        # for i in range(1, len(q)):
+        #     for n in range(N // 4 + 1):
+        #         terms = [_np.cos((2*k)*x)*(vals['A'+str(2*n)][i-1, k])
+        #                  for k in range(N // 4 + 1)]
+        #         ce = vals['ce' + str(2 * n)][i - 1, :] + _np.sum(terms, axis=0)
+        #         ce = ce[_np.newaxis, :]
+        #         ce = _np.append(vals['ce' + str(2 * n)], ce, axis=0)
+        #         vals.update({'ce' + str(2 * n): ce})
         return vals
 
 

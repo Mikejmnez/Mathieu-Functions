@@ -39,18 +39,11 @@ def eig_pairs(A):
     coefficients associated with the Mathieu function. Both the eigenvalues
     and Fourier coefficients are given in ascending order.
     '''
-    N = len(A[:, 0])  # size of square matrix.
     w, V = _LA.eig(A)  # calculates the eigenvalue
     V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
     ord_w, V = order_check(w, V)
-    Coeffs = V[:, 0]  # first coefficients
-    Coeffs = Coeffs[_np.newaxis, :]
-    for n in range(1, N):
-        coeffs = V[:, n]
-        coeffs = coeffs[_np.newaxis, :]
-        Coeffs = _np.append(Coeffs, coeffs, axis=0)
-    return ord_w, Coeffs
+    return ord_w, V
 
 
 def order_check(a, v):
