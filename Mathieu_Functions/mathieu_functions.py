@@ -77,7 +77,10 @@ def Fcoeffs(As, n=0, q=0.00001):
     """
     # Estimate limiting value for small q (pos or neg) and correct.
     for k in range(len(As[0, :])):
-        limA = coeff0(q, k)  # limiting value for each entry of eigenvector.
+        if k == 0:
+            limA = coeff0(q, k)  # limit value for each entry of eig-vector.
+        else:
+            limA = coeffs(q, k, n)
         if _np.sign(As[0, k]) == 0:
             As[0, k] = limA  # limiting value of coeff for small q
         else:
@@ -91,7 +94,7 @@ def Fcoeffs(As, n=0, q=0.00001):
 
 
 def coeff0(q, r):
-    ''' Limiting value of Fouerier coefficients associated with zeroth
+    ''' Limiting value of Fourier coefficients associated with zeroth
     eigenvalue, for |q| << 1. These are used to check the correct sign of
     the numerically calculate eigenvectors components as a function of q.
     '''
@@ -100,3 +103,29 @@ def coeff0(q, r):
     else:
         coeff = ((-q) ** r) / ((4 ** r) * (factorial(r) ** 2))
     return coeff
+
+
+def coeffs(q, r, n):
+    """Limiting value of Fourier coefficients other than that of zeroth
+    eigenvalue.
+    """
+    if r == 0:
+        coeff = (1 / (n * factorial((2 * n) - 1))) * (q / 4) ** n
+    else:
+        if n < r:
+            nume = factorial(2 * n)
+            denom = factorial(r - n) * factorial(r + n)
+            coeff = (nume / denom) * (q / 4) * (r - n)
+        elif n == r:
+            nume = - (4 * (n ** 2) + 1) / ((4 * (n ** 2) - 1)**2)
+            coeff = 1 + (nume * ((q / 4)**2))
+        elif n > r:
+            nume = factorial(n + r - 1)
+            denom = factorial(n - r) * factorial((2 * n) - r)
+            coeff = (nume / denom) * (q / 4)**(n - r)
+    return coeff
+
+
+
+
+
