@@ -50,6 +50,14 @@ class mathieu_functions:
                          + _np.sum(terms, axis=0)})
             vals.update({'ce' + str(2 * n):
                          vals['ce' + str(2 * n)][_np.newaxis, :]})
+        for i in range(1, len(q)):
+            for n in range(N // 4 + 1):
+                terms = [_np.cos((2*k)*x)*(vals['A'+str(2*n)][i-1, k])
+                         for k in range(N // 4 + 1)]
+                ce = vals['ce' + str(2 * n)][i - 1, :] + _np.sum(terms, axis=0)
+                ce = ce[_np.newaxis, :]
+                ce = _np.append(vals['ce' + str(2 * n)], ce, axis=0)
+                vals.update({'ce' + str(2 * n): ce})
         return vals
 
 
