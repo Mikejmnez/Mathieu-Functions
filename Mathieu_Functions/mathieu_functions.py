@@ -77,7 +77,7 @@ def Fcoeffs(As, n=0, q=0.00001):
     """
     # Estimate limiting value for small q (pos or neg) and correct.
     for k in range(len(As[0, :])):
-        if k == 0:
+        if n == 0:
             limA = coeff0(q, k)  # limit value for each entry of eig-vector.
         else:
             limA = coeffs(q, k, n)
