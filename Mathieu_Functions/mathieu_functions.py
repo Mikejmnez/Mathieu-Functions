@@ -145,6 +145,8 @@ def Anorm(A, type='ce2n'):
         norm = 1
     else:
         A0 = A[0]
-        norm = 2 * (A0**2) + _np.sum(A[1:]**2)
+        A0star = _np.conjugate(A0)
+        A2nstar = _np.conjugate(A[1:])
+        norm = 2 * (A0 * A0star) + _np.sum(A[1:] * A2nstar)
     A = A / norm
     return A
