@@ -38,6 +38,7 @@ class mathieu_functions:
                 an, A = eig_pairs(matrix_system(q[k], N))
                 a.append(an[n])
                 nA = A[:, n]
+                nA = Anorm(nA)
                 nAs = nA[_np.newaxis, :]
                 As = _np.append(As, nAs, axis=0)
             As = Fcoeffs(As, n)
@@ -129,6 +130,21 @@ def coeffs(q, r, n):
     return coeff
 
 
-
-
-
+def Anorm(A, type='ce2n'):
+    """ Normalization of eigenvectors in accordance to Mathieu functions.
+    Default is for that associated with ce_{2n}(q, z).
+    Input:
+        A: 1d-array. len(A) = N, N being the number of Fourier coefficients.
+        type: str, default `ce2n`. Normalization for other functions is
+        different.
+    Output:
+        A: 1d-array. Normalized eigenvector.
+    """
+    if type is not 'ce2n':
+        print('Not yet supported')
+        norm = 1
+    else:
+        A0 = A[0]
+        norm = 2 * (A0**2) + _np.sum(A[1:]**2)
+    A = A / norm
+    return A
