@@ -141,7 +141,6 @@ def Anorm(A, type='ce2n'):
         print('Not yet supported')
         norm = 1
     else:
-        print('here')
         A0 = A[0]
         A0star = _np.conjugate(A0)
         A2nstar = _np.conjugate(A[1:])
