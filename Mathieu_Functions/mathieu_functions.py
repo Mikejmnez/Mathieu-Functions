@@ -32,13 +32,12 @@ class mathieu_functions:
         for n in range(M):
             a, A = eig_pairs(matrix_system(q[0], N))
             a = [a[n]]  # makes a list of the nth eigenvalue
-            As = A[:, n]
+            As = Anorm(A[:, n])
             As = As[_np.newaxis, :]
             for k in range(1, len(q)):
                 an, A = eig_pairs(matrix_system(q[k], N))
                 a.append(an[n])
-                nA = A[:, n]
-                nA = Anorm(nA)
+                nA = Anorm(A[:, n])
                 nAs = nA[_np.newaxis, :]
                 As = _np.append(As, nAs, axis=0)
             As = Fcoeffs(As, n)
