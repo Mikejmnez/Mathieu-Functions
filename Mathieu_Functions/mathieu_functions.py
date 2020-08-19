@@ -21,7 +21,6 @@ class mathieu_functions:
         N,
         type='even',
         period='one',
-        debug=False
     ):
         """Cosine elliptic function ce_{2n}, as a function of parameter
         q (which can be real or purely imaginary), the characteristic number
@@ -30,7 +29,7 @@ class mathieu_functions:
         vals = {}
         M = N // 2 + 1
         for n in range(M):
-            a, A = eig_pairs(matrix_system(q[0], N))
+            a, A = eig_pairs(matrix_system(q[0], N, type, period))
             a = [a[n]]  # makes a list of the nth eigenvalue
             As = Anorm(A[:, n])
             As = As[_np.newaxis, :]
@@ -138,8 +137,8 @@ def Anorm(A, type='ce2n'):
         A: 1d-array. Normalized eigenvector.
     """
     if type is not 'ce2n':
-        print('Not yet supported')
-        norm = 1
+        Astar = _np.conjugate(A)
+        norm = _np.sum(A * Astar)
     else:
         A0 = A[0]
         A0star = _np.conjugate(A0)
