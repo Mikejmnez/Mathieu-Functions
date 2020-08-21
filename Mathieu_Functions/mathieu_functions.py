@@ -121,7 +121,6 @@ def Fcoeffs(As, n=0, q=0.00001):
             Corrected Eigenvector with same shape as original
     """
     # Estimate limiting value for small q (pos or neg) and correct.
-    delta = coeff_slope(As)
     for k in range(len(As[0, :])):
         if n == 0:
             limA = coeff0(q, k)  # limit value for each entry of eig-vector.
@@ -132,24 +131,31 @@ def Fcoeffs(As, n=0, q=0.00001):
         else:
             if _np.sign(limA) != _np.sign(As[0, k]):
                 As[0, k] = -As[0, k]
-    for k in range(1, len(As[:-1, 0])):  # for all values in q
+    for k in range(1, len(As[:, 0])):  # for all values in q
         for m in range(len(As[0, :])):  # iterate through F coeffs
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if abs(delta[k, m]) > 0.1 * abs(As[k - 1, m]):
-                    if _np.sign(delta[k - 1, m]) != _np.sign(delta[k + 1, m]):
-                    # F coeff ok to change sign only slope discontinuous
-                    # calculated using centered order differencing
-                        As[k, m] = - As[k, m]
+                As[k, m] = -As[k, m]
+    for m in range(len(As[0, :])):
+        nAs = reflect_coeffs(As[:, m])
+        As[:, m] = reflect_coeffs(nAs)  # second crossing of F coeffs
     return As
 
 
-def coeff_slope(A):
-    """ Returns the slope of the Fourier coefficient. This is used when
-    assesing whether change in sign of Fourier coefficient is due to
-    numerical algorithm, or because it does so. Works for A real
+def reflect_coeffs(A):
+    """Fixes the reflection caused on F coefficients when approaching zero,
+    in their q-dependence. This typically happens once.
+    Input:
+        A: 1d array. Fourier coefficient as a function of q.
+    Output:
+        A: 1d array. Same dimensions and magnitude as original array.
     """
-    diff = _np.gradient(A, axis=0)  # slopes, same dimensions as eigen vector
-    return diff
+    diffA = _np.gradient(A)  # center order differencing.
+    for k in range(1, len(A) - 1):
+        if _np.sign(diffA[k + 1]) != _np.sign(diffA[k - 1]):
+            if abs(A[k]) < 0.1 and abs(A[k - 1]) > abs(A[k]):
+                A[k:] = -A[k:]  # reflect rest of values
+                break
+    return A
 
 
 def coeff0(q, r):
