@@ -131,11 +131,23 @@ def Fcoeffs(As, n=0, q=0.00001):
         else:
             if _np.sign(limA) != _np.sign(As[0, k]):
                 As[0, k] = -As[0, k]
-    for k in range(1, len(As[:, 0])):
-        for m in range(len(As[0, :])):
+    for k in range(1, len(As[:, 0])):  # for all values in q
+        for m in range(len(As[0, :])):  # iterate through F coeffs
+            delta = coeff_slope(As[k, :])
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                As[k, m] = - As[k, m]
+                if delta[m - 1] != delta[m]:
+                    # F coeff changes sign only when it is continuous
+                    As[k, m] = - As[k, m]
     return As
+
+
+def coeff_slope(A):
+    """ Returns the slope of the Fourier coefficient. This is used when
+    assesing whether change in sign of Fourier coefficient is due to
+    numerical algorithm, or because it does so. Most likely only when n=m.
+    """
+    diff = A[1:] - A[:-1]
+    return diff
 
 
 def coeff0(q, r):
@@ -152,7 +164,7 @@ def coeff0(q, r):
 
 def coeffs(q, r, n):
     """Limiting value of Fourier coefficients other than that of zeroth
-    eigenvalue.
+    eigenvalue. Only for q near zero.
     """
     if r == 0:
         coeff = (1 / (n * factorial((2 * n) - 1))) * (q / 4) ** n
