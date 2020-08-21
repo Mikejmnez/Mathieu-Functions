@@ -27,7 +27,7 @@ class mathieu_functions:
         `a`, and the domain.
         """
         vals = {}
-        M = N // 2 + 1
+        M = N
         for n in range(M):
             a, A = eig_pairs(matrix_system(q[0], N, type, period))
             a = [a[n]]  # makes a list of the nth eigenvalue
@@ -51,7 +51,7 @@ class mathieu_functions:
                          vals['ce' + str(2 * n)][_np.newaxis, :]})
         for i in range(1, len(q)):
             for n in range(M):
-                terms = [_np.cos((2*k)*x)*(vals['A'+str(2*n)][i, k])
+                terms = [_np.cos((2*k)*x) * (vals['A' + str(2 * n)][i, k])
                          for k in range(M)]
                 ce = _np.sum(terms, axis=0)
                 ce = ce[_np.newaxis, :]
@@ -177,8 +177,8 @@ def coeffs(q, r, n):
     if r == 0:
         coeff = (1 / (n * factorial((2 * n) - 1))) * (q / 4) ** n
     else:
-        if n < r:
-            nume = factorial(2 * n)
+        if n < r:  # issue here, b/c not always start positive
+            nume = ((-1)**(r - n)) * factorial(2 * n)
             denom = factorial(r - n) * factorial(r + n)
             coeff = (nume / denom) * (q / 4) * (r - n)
         elif n == r:
