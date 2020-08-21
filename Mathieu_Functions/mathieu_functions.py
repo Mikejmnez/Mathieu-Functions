@@ -135,7 +135,7 @@ def Fcoeffs(As, n=0, q=0.00001):
         for m in range(len(As[0, :])):  # iterate through F coeffs
             delta = coeff_slope(As[k, :])
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if delta[m - 1] != delta[m]:
+                if m < len(As[0, :]) and delta[m - 1] != delta[m]:
                     # F coeff changes sign only when it is continuous
                     As[k, m] = - As[k, m]
     return As
@@ -144,7 +144,7 @@ def Fcoeffs(As, n=0, q=0.00001):
 def coeff_slope(A):
     """ Returns the slope of the Fourier coefficient. This is used when
     assesing whether change in sign of Fourier coefficient is due to
-    numerical algorithm, or because it does so. Most likely only when n=m.
+    numerical algorithm, or because it does so. Works for A real
     """
     diff = A[1:] - A[:-1]
     return diff
