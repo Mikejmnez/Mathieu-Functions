@@ -135,8 +135,8 @@ def Fcoeffs(As, n=0, q=0.00001):
     for k in range(1, len(As[:, 0])):  # for all values in q
         for m in range(len(As[0, :])):  # iterate through F coeffs
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if delta[k - 1, m] != 0:
-                    # F coeff ok to change sign only when local extrema
+                if _np.sign(delta[k - 1, m]) != _np.sign(delta[k, m]):
+                    # F coeff ok to change sign only slope discontinuous
                     As[k, m] = - As[k, m]
     return As
 
