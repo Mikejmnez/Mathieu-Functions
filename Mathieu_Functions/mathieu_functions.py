@@ -135,8 +135,8 @@ def Fcoeffs(As, n=0, q=0.00001):
         delta = coeff_slope(As[k, :])  # slopes
         for m in range(len(As[0, :])):  # iterate through F coeffs
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if delta[m - 1] != delta[m]:
-                    # F coeff ok to change sign only when slope is continuous
+                if delta[m - 1] != 0:
+                    # F coeff ok to change sign only when local extrema
                     As[k, m] = - As[k, m]
     return As
 
