@@ -132,11 +132,11 @@ def Fcoeffs(As, n=0, q=0.00001):
             if _np.sign(limA) != _np.sign(As[0, k]):
                 As[0, k] = -As[0, k]
     for k in range(1, len(As[:, 0])):  # for all values in q
+        delta = coeff_slope(As[k, :])  # slopes
         for m in range(len(As[0, :])):  # iterate through F coeffs
-            delta = coeff_slope(As[k, :])
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if m < len(As[0, :]) and delta[m - 1] != delta[m]:
-                    # F coeff changes sign only when it is continuous
+                if delta[m - 1] != delta[m]:
+                    # F coeff ok to change sign only when slope is continuous
                     As[k, m] = - As[k, m]
     return As
 
@@ -146,7 +146,7 @@ def coeff_slope(A):
     assesing whether change in sign of Fourier coefficient is due to
     numerical algorithm, or because it does so. Works for A real
     """
-    diff = A[1:] - A[:-1]
+    diff = _np.gradient(A)  # slopes, same dimensions as eigen vector
     return diff
 
 
