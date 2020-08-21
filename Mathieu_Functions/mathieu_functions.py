@@ -121,6 +121,7 @@ def Fcoeffs(As, n=0, q=0.00001):
             Corrected Eigenvector with same shape as original
     """
     # Estimate limiting value for small q (pos or neg) and correct.
+    delta = coeff_slope(As)
     for k in range(len(As[0, :])):
         if n == 0:
             limA = coeff0(q, k)  # limit value for each entry of eig-vector.
@@ -132,10 +133,9 @@ def Fcoeffs(As, n=0, q=0.00001):
             if _np.sign(limA) != _np.sign(As[0, k]):
                 As[0, k] = -As[0, k]
     for k in range(1, len(As[:, 0])):  # for all values in q
-        delta = coeff_slope(As[k, :])  # slopes
         for m in range(len(As[0, :])):  # iterate through F coeffs
             if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                if delta[m - 1] != 0:
+                if delta[k - 1, m] != 0:
                     # F coeff ok to change sign only when local extrema
                     As[k, m] = - As[k, m]
     return As
@@ -146,7 +146,7 @@ def coeff_slope(A):
     assesing whether change in sign of Fourier coefficient is due to
     numerical algorithm, or because it does so. Works for A real
     """
-    diff = _np.gradient(A)  # slopes, same dimensions as eigen vector
+    diff = _np.gradient(A, axis=0)  # slopes, same dimensions as eigen vector
     return diff
 
 
