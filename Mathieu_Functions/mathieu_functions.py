@@ -59,6 +59,51 @@ class mathieu_functions:
                 vals.update({'ce' + str(2 * n): ce})
         return vals
 
+    @classmethod
+    def ce_odd(
+        cls,
+        q,
+        x,
+        N,
+        type='odd',
+        period='two',
+    ):
+        """Cosine elliptic function ce_{2n+1}, as a function of parameter
+        q (which can be real or purely imaginary), the characteristic number
+        `a`, and the domain.
+        """
+        pass
+
+    @classmethod
+    def se_even(
+        cls,
+        q,
+        x,
+        N,
+        type='even',
+        period='one',
+    ):
+        """Sine elliptic function se_{2n+2}, as a function of parameter
+        q (which can be real or purely imaginary), the characteristic number
+        `b`, and the domain.
+        """
+        pass
+
+    @classmethod
+    def se_odd(
+        cls,
+        q,
+        x,
+        N,
+        type='even',
+        period='two',
+    ):
+        """Sine elliptic function se_{2n+1}, as a function of parameter
+        q (which can be real or purely imaginary), the characteristic number
+        `b`, and the domain.
+        """
+        pass
+
 
 def Fcoeffs(As, n=0, q=0.00001):
     """ Returns the Fourier coefficient of the Mathieu functions for given
