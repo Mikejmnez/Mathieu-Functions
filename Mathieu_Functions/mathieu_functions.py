@@ -21,20 +21,22 @@ class mathieu_functions:
         N,
         type='even',
         period='one',
+        As=None,
     ):
         """Cosine elliptic function ce_{2n}, as a function of parameter
         q (which can be real or purely imaginary), the characteristic number
         `a`, and the domain.
         """
         # initialize the coefficients (q=0)
-        As = A_coefficients(q, N, type, period)
+        if As is None:
+            As = A_coefficients(q, N, type, period)
         vals = {}
         for n in range(N):
             terms = [_np.cos((2 * k) * x) * (As['A' + str(2 * n)][0, k])
                      for k in range(N)]
             vals.update({'ce' + str(2 * n): _np.sum(terms, axis=0)})
             vals.update({'ce' + str(2 * n):
-                         As['ce' + str(2 * n)][_np.newaxis, :]})
+                         vals['ce' + str(2 * n)][_np.newaxis, :]})
             vals.update({'a' + str(2 * n): As['a' + str(2 * n)]})
         for i in range(1, len(q)):
             for n in range(N):
@@ -42,7 +44,7 @@ class mathieu_functions:
                          for k in range(N)]
                 ce = _np.sum(terms, axis=0)
                 ce = ce[_np.newaxis, :]
-                ce = _np.append(As['ce' + str(2 * n)], ce, axis=0)
+                ce = _np.append(vals['ce' + str(2 * n)], ce, axis=0)
                 vals.update({'ce' + str(2 * n): ce})
         return vals
 
