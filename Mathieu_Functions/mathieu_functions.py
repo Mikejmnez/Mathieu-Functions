@@ -26,36 +26,23 @@ class mathieu_functions:
         q (which can be real or purely imaginary), the characteristic number
         `a`, and the domain.
         """
-        vals = {}
-        M = N
-        for n in range(M):
-            a, A = eig_pairs(matrix_system(q[0], N, type, period))
-            a = [a[n]]  # makes a list of the nth eigenvalue
-            As = Anorm(A[:, n])
-            As = As[_np.newaxis, :]
-            for k in range(1, len(q)):
-                an, A = eig_pairs(matrix_system(q[k], N))
-                a.append(an[n])
-                nA = Anorm(A[:, n])
-                nAs = nA[_np.newaxis, :]
-                As = _np.append(As, nAs, axis=0)
-            As = Fcoeffs(As, n)
-            vals.update({'a' + str(2 * n): _np.array(a)})
-            vals.update({'A' + str(2 * n): As})
         # initialize the coefficients (q=0)
-        for n in range(M):
-            terms = [_np.cos((2 * k) * x) * (vals['A' + str(2 * n)][0, k])
-                     for k in range(M)]
+        As = A_coefficients(q, N, type, period)
+        vals = {}
+        for n in range(N):
+            terms = [_np.cos((2 * k) * x) * (As['A' + str(2 * n)][0, k])
+                     for k in range(N)]
             vals.update({'ce' + str(2 * n): _np.sum(terms, axis=0)})
             vals.update({'ce' + str(2 * n):
-                         vals['ce' + str(2 * n)][_np.newaxis, :]})
+                         As['ce' + str(2 * n)][_np.newaxis, :]})
+            vals.update({'a' + str(2 * n): As['a' + str(2 * n)]})
         for i in range(1, len(q)):
-            for n in range(M):
-                terms = [_np.cos((2*k)*x) * (vals['A' + str(2 * n)][i, k])
-                         for k in range(M)]
+            for n in range(N):
+                terms = [_np.cos((2*k)*x) * (As['A' + str(2 * n)][i, k])
+                         for k in range(N)]
                 ce = _np.sum(terms, axis=0)
                 ce = ce[_np.newaxis, :]
-                ce = _np.append(vals['ce' + str(2 * n)], ce, axis=0)
+                ce = _np.append(As['ce' + str(2 * n)], ce, axis=0)
                 vals.update({'ce' + str(2 * n): ce})
         return vals
 
@@ -103,6 +90,25 @@ class mathieu_functions:
         `b`, and the domain.
         """
         pass
+
+
+def A_coefficients(q, N, type, period):
+    vals = {}
+    for n in range(N):
+        a, A = eig_pairs(matrix_system(q[0], N, type, period))
+        a = [a[n]]  # makes a list of the nth eigenvalue
+        As = Anorm(A[:, n])
+        As = As[_np.newaxis, :]
+        for k in range(1, len(q)):
+            an, A = eig_pairs(matrix_system(q[k], N))
+            a.append(an[n])
+            nA = Anorm(A[:, n])
+            nAs = nA[_np.newaxis, :]
+            As = _np.append(As, nAs, axis=0)
+        As = Fcoeffs(As, n)
+        vals.update({'a' + str(2 * n): _np.array(a)})
+        vals.update({'A' + str(2 * n): As})
+    return vals
 
 
 def Fcoeffs(As, n=0, q=0.00001):
