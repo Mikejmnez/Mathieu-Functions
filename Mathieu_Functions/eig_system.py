@@ -30,7 +30,9 @@ def matrix_system(q, N, type='even', period='one'):
         if period is 'one':  # se_{2n+1}
             pass
         elif period is 'two':  # ce_{2n+1}
-            pass
+            d = [((2. * r) + 1)**2 for r in range(N)]
+            e = q * _np.ones(N - 1)
+            A = _np.diag(d) + _np.diag(e, k=-1) + _np.diag(e, k=1)
     return A
 
 
