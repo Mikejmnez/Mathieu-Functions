@@ -102,7 +102,7 @@ def A_coefficients(q, N, type, period):
         As = Anorm(A[:, n])
         As = As[_np.newaxis, :]
         for k in range(1, len(q)):
-            an, A = eig_pairs(matrix_system(q[k], N))
+            an, A = eig_pairs(matrix_system(q[k], N), type, period)
             a.append(an[n])
             nA = Anorm(A[:, n])
             nAs = nA[_np.newaxis, :]
@@ -161,7 +161,7 @@ def matrix_inhom(an, q, N, type, period):
     return Ain
 
 
-def Fcoeffs(As, n=0, q=0.00001):
+def Fcoeffs(As, n=0, q=0.00000001):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
     routines for estimating eigenvectors might converge in different signs
@@ -238,7 +238,7 @@ def coeffs(q, r, n):
             denom = factorial(r - n) * factorial(r + n)
             coeff = (nume / denom) * (q / 4) * (r - n)
             if r >= (8 + n):  # only high wavenumbers
-                coeff = -coeff
+                coeff = - coeff
         elif n == r:
             nume = - (4 * (n ** 2) + 1) / ((4 * (n ** 2) - 1)**2)
             coeff = 1 + (nume * ((q / 4)**2))
