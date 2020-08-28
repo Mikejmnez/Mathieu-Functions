@@ -247,6 +247,8 @@ def coeffs(q, r, n):
         elif n > r:
             nume = factorial(n + r - 1)
             denom = factorial(n - r) * factorial((2 * n) - r)
+            if n >= 7 and n == r + 1:
+                q = 1e-11  # small enough now, when power is order 1
             power = (q / 4)**(n - r)
             coeff = (nume / denom) * power
     return coeff
