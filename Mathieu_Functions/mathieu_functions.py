@@ -22,6 +22,7 @@ class mathieu_functions:
         type='even',
         period='one',
         As=None,
+        Ncut=0
     ):
         """Cosine elliptic function ce_{2n}, as a function of parameter
         q (which can be real or purely imaginary), the characteristic number
@@ -31,6 +32,8 @@ class mathieu_functions:
         if As is None:
             As = A_coefficients(q, N, type, period)
         vals = {}
+        if Ncut != 0:
+            N = Ncut
         for n in range(N):
             terms = [_np.cos((2 * k) * x) * (As['A' + str(2 * n)][0, k])
                      for k in range(N)]
@@ -96,6 +99,10 @@ class mathieu_functions:
 
 def A_coefficients(q, N, type, period):
     vals = {}
+    if q[0].imag != 0:
+        imag = True
+    else:
+        imag = False
     for n in range(N):
         a, A = eig_pairs(matrix_system(q[0], N, type, period), type, period)
         a = [a[n]]  # makes a list of the nth eigenvalue
@@ -107,7 +114,7 @@ def A_coefficients(q, N, type, period):
             nA = Anorm(A[:, n])
             nAs = nA[_np.newaxis, :]
             As = _np.append(As, nAs, axis=0)
-        As = Fcoeffs(As, n)
+        As = Fcoeffs(As, n, flag=imag)
         vals.update({'a' + str(2 * n): _np.array(a)})
         vals.update({'A' + str(2 * n): As})
     return vals
@@ -161,7 +168,7 @@ def matrix_inhom(an, q, N, type, period):
     return Ain
 
 
-def Fcoeffs(As, n=0, q=0.00001):
+def Fcoeffs(As, n=0, q=0.00001, flag=False):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
     routines for estimating eigenvectors might converge in different signs
@@ -177,24 +184,28 @@ def Fcoeffs(As, n=0, q=0.00001):
             Corrected Eigenvector with same shape as original
     """
     # Estimate limiting value for small q (pos or neg) and correct.
-    for k in range(len(As[0, :])):
-        if n == 0:
-            limA = coeff0(q, k)  # limit value for each entry of eig-vector.
-        else:
-            limA = coeffs(q, k, n)
-        if _np.sign(As[0, k]) == 0:
-            As[0, k] = limA  # limiting value of coeff for small q
-        else:
-            if _np.sign(limA) != _np.sign(As[0, k]):
-                As[0, k] = -As[0, k]
-    for k in range(1, len(As[:, 0])):  # for all values in q
-        for m in range(len(As[0, :])):  # iterate through F coeffs
-            if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
-                As[k, m] = -As[k, m]
-    for m in range(len(As[0, :])):
-        nAs = reflect_coeffs(As[:, m])
-        mAs = reflect_coeffs(nAs)  # second crossing of F coeffs
-        As[:, m] = reflect_coeffs(mAs)  # third reflection
+    if flag is True:
+        q = q * (1j)
+    else:
+        for k in range(len(As[0, :])):
+            if n == 0:
+                limA = coeff0(q, k)  # q~0 value for each entry of eig-vector.
+            else:
+                limA = coeffs(q, k, n)
+            if _np.sign(As[0, k]) == 0:
+                As[0, k] = limA  # q ~ 0 value of coeff for small q, n>0
+            else:
+                if _np.sign(limA) != _np.sign(As[0, k]):
+                    As[0, k] = -As[0, k]
+        for k in range(1, len(As[:, 0])):  # for all values in q
+            for m in range(len(As[0, :])):  # iterate through F coeffs
+                if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
+                    As[k, m] = -As[k, m]
+    if flag is False:
+        for m in range(len(As[0, :])):
+            nAs = reflect_coeffs(As[:, m])
+            mAs = reflect_coeffs(nAs)  # second crossing of F coeffs
+            As[:, m] = reflect_coeffs(mAs)  # third reflection
     return As
 
 
@@ -269,8 +280,8 @@ def Anorm(A, type='ce2n'):
         norm = _np.sum(A * Astar)
     else:
         A0 = A[0]
-        A0star = _np.conjugate(A0)
-        A2nstar = _np.conjugate(A[1:])
-        norm = 2 * (A0 * A0star) + _np.sum(A[1:] * A2nstar)
+        # A0star = _np.conjugate(A0)
+        # A2nstar = _np.conjugate(A[1:])
+        norm = 2 * (A0 ** 2) + _np.sum(A[1:]**2)
     A = A / norm
     return A
