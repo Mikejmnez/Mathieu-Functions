@@ -161,7 +161,7 @@ def matrix_inhom(an, q, N, type, period):
     return Ain
 
 
-def Fcoeffs(As, n=0, q=0.00000001):
+def Fcoeffs(As, n=0, q=0.00001):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
     routines for estimating eigenvectors might converge in different signs
@@ -193,8 +193,8 @@ def Fcoeffs(As, n=0, q=0.00000001):
                 As[k, m] = -As[k, m]
     for m in range(len(As[0, :])):
         nAs = reflect_coeffs(As[:, m])
-        As[:, m] = reflect_coeffs(nAs)  # second crossing of F coeffs
-        # As[:, m] = reflect_coeffs(mAs)  # third reflection
+        mAs = reflect_coeffs(nAs)  # second crossing of F coeffs
+        As[:, m] = reflect_coeffs(mAs)  # third reflection
     return As
 
 
@@ -237,16 +237,18 @@ def coeffs(q, r, n):
         if n < r:  # issue here, b/c not always start positive
             nume = ((-1)**(r - n)) * factorial(2 * n)
             denom = factorial(r - n) * factorial(r + n)
-            coeff = (nume / denom) * (q / 4) * (r - n)
-            if r >= (8 + n):  # only high wavenumbers
-                coeff = - coeff
+            power = (q / 4) * (r - n)
+            coeff = (nume / denom) * power
+            if r >= 8 + n:
+                coeff = -coeff
         elif n == r:
             nume = - (4 * (n ** 2) + 1) / ((4 * (n ** 2) - 1)**2)
             coeff = 1 + (nume * ((q / 4)**2))
         elif n > r:
             nume = factorial(n + r - 1)
             denom = factorial(n - r) * factorial((2 * n) - r)
-            coeff = (nume / denom) * (q / 4)**(n - r)
+            power = (q / 4)**(n - r)
+            coeff = (nume / denom) * power
     return coeff
 
 
