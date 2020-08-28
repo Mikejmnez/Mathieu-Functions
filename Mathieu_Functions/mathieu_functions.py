@@ -193,7 +193,8 @@ def Fcoeffs(As, n=0, q=0.00000001):
                 As[k, m] = -As[k, m]
     for m in range(len(As[0, :])):
         nAs = reflect_coeffs(As[:, m])
-        As[:, m] = reflect_coeffs(nAs)  # second crossing of F coeffs
+        mAs = reflect_coeffs(nAs)  # second crossing of F coeffs
+        As[:, m] = reflect_coeffs(mAs)  # third reflection
     return As
 
 
