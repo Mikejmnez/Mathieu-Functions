@@ -36,13 +36,14 @@ def matrix_system(q, N, type='even', period='one'):
     return A
 
 
-def eig_pairs(A):
+def eig_pairs(A, type='even', period='one'):
     ''' Calculates the characteristic value (eigenvalue) and the Fourier
     coefficients associated with the Mathieu function. Both the eigenvalues
     and Fourier coefficients are given in ascending order.
     '''
     w, V = _LA.eig(A)  # calculates the eigenvalue
-    V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
+    if [type, period] == ['even', 'one']:
+        V[0, :] = V[0, :] / _np.sqrt(2)  # remove factor on all first entries
     #  Sort the eigenvalues and in accordance, re-arrange eigenvectors
     ord_w, V = order_check(w, V)
     return ord_w, V

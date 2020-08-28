@@ -97,7 +97,7 @@ class mathieu_functions:
 def A_coefficients(q, N, type, period):
     vals = {}
     for n in range(N):
-        a, A = eig_pairs(matrix_system(q[0], N, type, period))
+        a, A = eig_pairs(matrix_system(q[0], N, type, period), type, period)
         a = [a[n]]  # makes a list of the nth eigenvalue
         As = Anorm(A[:, n])
         As = As[_np.newaxis, :]
@@ -159,6 +159,7 @@ def matrix_inhom(an, q, N, type, period):
     A = matrix_system(q, N, type, period)
     Ain = A - an * _np.eye(N)
     return Ain
+
 
 def Fcoeffs(As, n=0, q=0.00001):
     """ Returns the Fourier coefficient of the Mathieu functions for given
@@ -236,6 +237,8 @@ def coeffs(q, r, n):
             nume = ((-1)**(r - n)) * factorial(2 * n)
             denom = factorial(r - n) * factorial(r + n)
             coeff = (nume / denom) * (q / 4) * (r - n)
+            if r >= (8 + n):  # only high wavenumbers
+                coeff = -coeff
         elif n == r:
             nume = - (4 * (n ** 2) + 1) / ((4 * (n ** 2) - 1)**2)
             coeff = 1 + (nume * ((q / 4)**2))
