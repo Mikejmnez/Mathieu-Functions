@@ -106,12 +106,12 @@ def A_coefficients(q, N, type, period):
     for n in range(N):
         a, A = eig_pairs(matrix_system(q[0], N, type, period), type, period)
         a = [a[n]]  # makes a list of the nth eigenvalue
-        As = Anorm(A[:, n])
+        As = Anorm(A[:, n], type, period)
         As = As[_np.newaxis, :]
         for k in range(1, len(q)):
             an, A = eig_pairs(matrix_system(q[k], N), type, period)
             a.append(an[n])
-            nA = Anorm(A[:, n])
+            nA = Anorm(A[:, n], type, period)
             nAs = nA[_np.newaxis, :]
             As = _np.append(As, nAs, axis=0)
         As = Fcoeffs(As, n, flag=imag)
@@ -265,7 +265,7 @@ def coeffs(q, r, n):
     return coeff
 
 
-def Anorm(A, type='ce2n'):
+def Anorm(A, type='even', period='one'):
     """ Normalization of eigenvectors in accordance to Mathieu functions.
     Default is for that associated with ce_{2n}(q, z).
     Input:
@@ -275,13 +275,12 @@ def Anorm(A, type='ce2n'):
     Output:
         A: 1d-array. Normalized eigenvector.
     """
-    if type is not 'ce2n':
-        Astar = _np.conjugate(A)
-        norm = _np.sum(A * Astar)
+    if [type, period] == ['even', 'one']:
+        A0star = A[0]  # _np.conjugate(A[0])
+        Astar = A[1:]  # _np.conjugate(A[1:])
+        norm = (2 * (A[0] * A0star)) + _np.sum(A[1:] * Astar)
     else:
-        A0 = A[0]
-        # A0star = _np.conjugate(A0)
-        # A2nstar = _np.conjugate(A[1:])
-        norm = 2 * (A0 ** 2) + _np.sum(A[1:]**2)
+        norm = _np.sum(A * _np.conjugate(A))
     A = A / norm
     return A
+
