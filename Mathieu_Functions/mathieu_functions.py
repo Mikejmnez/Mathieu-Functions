@@ -120,54 +120,6 @@ def A_coefficients(q, N, type, period):
     return vals
 
 
-def solve_system(an, b, q, N, type, period):
-    """Inverts the system
-        (A - a_n*I)x_{n} = b
-    and returns the Fourier coefficients `x_{n}` resulting from the inversion.
-
-    Input:
-        q: float(a)
-        an: 1d-array. Nth-eigenvalue of Mathieu's equation. a_{n} = a_{n}(q).
-            len(a_{n}) = len(q).
-        q
-        b: 1d-array
-    """
-    vals = {}
-    Ain = matrix_inhom(an[0], q[0], N, type, period)  # matrix to invert
-    invA = _np.inv(Ain)
-    As = _np.dot(invA * b)  # matrix multiplication on rhs of system
-    As = Anorm(As)
-    As = As[_np.newaxis, :]
-    for k in range(1, len(q)):
-        Ain = matrix_inhom(an[k], q[k], N, type, period)
-        invA = _np.inv(Ain)
-        nAs = _np.dot(invA * b)
-        nAs = Anorm(nAs)
-        nAs = nAs[_np.newaxis, :]
-        As = _np.append(As, nAs, axis=0)
-    for n in range(N):
-        vals.update({'Ai' + str(2 * n): As[:, n]})
-    return vals
-
-
-def matrix_inhom(an, q, N, type, period):
-    """Returns the matrix used to invert when solving an inhomogeneous system,
-    associated with a particular eigenvalue. This is
-        Ai = A - a_nI
-    Input:
-        an: value of eigenvalue for fixed q.
-        q: Parameter value, either real or (purely) imaginary.
-        N: integer, order (size) or matrix. This value is dependent on
-            the value of q. For larger values of q, a greater N is needed.
-        type: str, either `even` or `odd`.
-        period: str, either `one` or `two`. Together with `type`, define the
-            eigensolution.
-    """
-    A = matrix_system(q, N, type, period)
-    Ain = A - an * _np.eye(N)
-    return Ain
-
-
 def Fcoeffs(As, n=0, q=0.00001, flag=False):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
