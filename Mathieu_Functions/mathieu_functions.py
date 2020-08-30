@@ -124,6 +124,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
     """Calculates the first order correction term
     Input:
         a: 1d-array. It is the eigenvalue of a Mathieu function
+        x0: 1d-array. Eigenvector corresponding to eigenvalue a.
         b: 1d-array, inhomogeneous unit-length vector of size 1xN.
         eps: float, real and positive << 1. Perturbation parameter.
         q: 1d-array of float numbers. Real or purely imaginary.
@@ -138,7 +139,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
     """
     A = matrix_system(q[0], N, type, period)
     Aplus = pseudo_inverse(a0[0], q[0], N, type, period)
-    X1 = _np.dot(Aplus, b)  # calculate norm here?
+    X1 = _np.dot(Aplus, b)  # should be orthogonal to x0
     AX1 = _np.dot(A, X1)
     AX1 = AX1 - b
     a1 = _np.dot(X1.T, AX1)
@@ -153,7 +154,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
             a1.append(_np.dot(x1.T, Ax1 - b))
             x1 = x1[_np.newaxis, :]
             X1 = _np.append(X1, x1, axis=0)
-    return a1, X1
+    return {'a1': a1, 'X1': X1}
 
 
 def Fcoeffs(As, n=0, q=0.00001, flag=False):
