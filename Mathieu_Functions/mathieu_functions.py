@@ -1,7 +1,7 @@
 """
 defines a class where the Mathieu functions ce and se are defined.
 """
-from eig_system import matrix_system, eig_pairs
+from eig_system import matrix_system, eig_pairs, pseudo_inverse
 from math import factorial
 import numpy as _np
 
@@ -118,6 +118,42 @@ def A_coefficients(q, N, type, period):
         vals.update({'a' + str(2 * n): _np.array(a)})
         vals.update({'A' + str(2 * n): As})
     return vals
+
+
+def correction_term(a0, x0, b, eps, q, N, type, period):
+    """Calculates the first order correction term
+    Input:
+        a: 1d-array. It is the eigenvalue of a Mathieu function
+        b: 1d-array, inhomogeneous unit-length vector of size 1xN.
+        eps: float, real and positive << 1. Perturbation parameter.
+        q: 1d-array of float numbers. Real or purely imaginary.
+        N: int, the order (size) of the square matrix, whose off-diagonal
+        entries contain the parameter q.
+        type: str, either `even` or `odd`, referencing the type of Mathieu
+            function.
+        period: str, either `one` or `two`, refering to pi-periodic or
+            two-pi periodic.
+    Outout:
+        A+: Moore-Penrose matrix that is the pseudo inverse of A-aI.
+    """
+    A = matrix_system(q[0], N, type, period)
+    Aplus = pseudo_inverse(a0[0], q[0], N, type, period)
+    X1 = _np.dot(Aplus, b)  # calculate norm here?
+    AX1 = _np.dot(A, X1)
+    AX1 = AX1 - b
+    a1 = _np.dot(X1.T, AX1)
+    if len(q) > 1:  # allows to test for single vals of q.
+        X1 = X1[_np.newaxis, :]
+        a1 = [a1]
+        for k in range(1, len(q)):
+            A = matrix_system(q[k], N, type, period)
+            Aplus = pseudo_inverse(a0[k], q[k], N, type, period)
+            x1 = _np.dot(Aplus, b)
+            Ax1 = _np.dot(A, x1)
+            a1.append(_np.dot(x1.T, Ax1 - b))
+            x1 = x1[_np.newaxis, :]
+            X1 = _np.append(X1, x1, axis=0)
+    return a1, X1
 
 
 def Fcoeffs(As, n=0, q=0.00001, flag=False):

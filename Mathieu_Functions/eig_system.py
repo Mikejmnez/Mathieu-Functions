@@ -36,6 +36,28 @@ def matrix_system(q, N, type='even', period='one'):
     return A
 
 
+def pseudo_inverse(a, q, N, type, period):
+    """Calculates the Moore-Penrose inverse of a square matrix that results
+    from the Mathieu-eigenvalue system, with q the free parameter. q can be
+    purely real or purely imaginary. The eigenvalues of A must be simple.
+    Input:
+        a: float. It is the eigenvalue of a Mathieu function
+        q: float. Real or purely imaginary.
+        N: int, the order (size) of the square matrix, whose off-diagonal
+        entries contain the parameter q.
+        type: str, either `even` or `odd`, referencing the type of Mathieu
+            function.
+        period: str, either `one` or `two`, refering to pi-periodic or
+            two-pi periodic.
+    Outout:
+        A+: Moore-Penrose matrix that is the pseudo inverse of A-aI.
+    """
+    A = matrix_system(q, N, type, period)
+    singA = A - a * _np.eye(N)  # singular matrix.
+    pinv = _LA.pinv(singA)
+    return pinv
+
+
 def eig_pairs(A, type='even', period='one'):
     ''' Calculates the characteristic value (eigenvalue) and the Fourier
     coefficients associated with the Mathieu function. Both the eigenvalues
