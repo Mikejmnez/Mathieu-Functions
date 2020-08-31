@@ -144,7 +144,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
     AX1 = AX1 - b
     a1 = [_np.dot(X1.T, AX1)[0]]
     if len(q) > 1:  # allows to test for single vals of q.
-        X1 = X1[0] / _np.sqrt(2)
+        X1[0] = X1[0] / _np.sqrt(2)
         X1 = X1[_np.newaxis, :, 0]
         # a1 = [a1]
         for k in range(1, len(q)):
@@ -154,7 +154,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
             Ax1 = _np.dot(A, x1)
             Ax1 = Ax1 - b
             a1.append(_np.dot(x1.T, Ax1)[0])
-            x1 = x1[0] / _np.sqrt(2)
+            x1[0] = x1[0] / _np.sqrt(2)
             x1 = x1[_np.newaxis, :, 0]
             X1 = _np.append(X1, x1, axis=0)
     return {'a1': a1, 'X1': X1}
