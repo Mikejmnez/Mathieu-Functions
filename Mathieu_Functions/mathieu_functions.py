@@ -120,11 +120,10 @@ def A_coefficients(q, N, type, period):
     return vals
 
 
-def correction_term(a0, x0, b, eps, q, N, type, period):
+def correction_term(a0, b, eps, q, N, type, period):
     """Calculates the first order correction term
     Input:
         a: 1d-array. It is the eigenvalue of a Mathieu function
-        x0: 1d-array. Eigenvector corresponding to eigenvalue a.
         b: 1d-array, inhomogeneous unit-length vector of size 1xN.
         eps: float, real and positive << 1. Perturbation parameter.
         q: 1d-array of float numbers. Real or purely imaginary.
@@ -142,7 +141,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
     X1 = _np.dot(Aplus, b)  # should be orthogonal to x0
     AX1 = _np.dot(A, X1)
     AX1 = AX1 - b
-    a1 = [_np.dot(X1.T, AX1)[0]]
+    a1 = [_np.dot(_np.conjugate(X1).T, AX1)[0]]
     if len(q) > 1:  # allows to test for single vals of q.
         X1[0] = X1[0] / _np.sqrt(2)
         X1 = X1[_np.newaxis, :, 0]
@@ -153,7 +152,7 @@ def correction_term(a0, x0, b, eps, q, N, type, period):
             x1 = _np.dot(Aplus, b)
             Ax1 = _np.dot(A, x1)
             Ax1 = Ax1 - b
-            a1.append(_np.dot(x1.T, Ax1)[0])
+            a1.append(_np.dot(_np.conjugate(x1).T, Ax1)[0])
             x1[0] = x1[0] / _np.sqrt(2)
             x1 = x1[_np.newaxis, :, 0]
             X1 = _np.append(X1, x1, axis=0)
