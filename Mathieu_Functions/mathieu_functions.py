@@ -266,8 +266,8 @@ def Anorm(A, type='even', period='one'):
         A: 1d-array. Normalized eigenvector.
     """
     if [type, period] == ['even', 'one']:
-        A0star = A[0]  # _np.conjugate(A[0])
-        Astar = A[1:]  # _np.conjugate(A[1:])
+        A0star = _np.conjugate(A[0])
+        Astar = _np.conjugate(A[1:])
         norm = (2 * (A[0] * A0star)) + _np.sum(A[1:] * Astar)
     else:
         norm = _np.sum(A * _np.conjugate(A))
