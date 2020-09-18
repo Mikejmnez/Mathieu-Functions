@@ -191,7 +191,7 @@ def Fcoeffs(As, n=0, q=0.00001, flag=False):
             for m in range(len(As[0, :])):  # iterate through F coeffs
                 if _np.sign(As[k, m]) != _np.sign(As[k - 1, m]):
                     As[k, m] = -As[k, m]
-    if flag is False:
+    # if flag is False:
         for m in range(len(As[0, :])):
             nAs = reflect_coeffs(As[:, m])
             mAs = reflect_coeffs(nAs)  # second crossing of F coeffs
@@ -266,9 +266,12 @@ def Anorm(A, type='even', period='one'):
         A: 1d-array. Normalized eigenvector.
     """
     if [type, period] == ['even', 'one']:
+        # if flag is True:
+        #     norm = 1
+        # else:
         A0star = _np.conjugate(A[0])
         Astar = _np.conjugate(A[1:])
-        norm = (2 * (A[0] * A0star)) + _np.sum(A[1:] * Astar)
+        norm = _np.sqrt((2 * (A[0] * A0star)) + _np.sum(A[1:] * Astar))
     else:
         norm = _np.sum(A * _np.conjugate(A))
     A = A / norm

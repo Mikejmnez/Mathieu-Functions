@@ -84,5 +84,7 @@ def order_check(a, v):
     else:
         Ind = _np.argsort(_np.round(a, 5))  # sorting through 5 decimals
         ordered_a = a[Ind]
-        nv = v[Ind, :]
+        nv = 0 * _np.copy(v)
+        for k in range(len(Ind)):
+            nv[:, k] = v[:, Ind[k]]
     return ordered_a, nv
