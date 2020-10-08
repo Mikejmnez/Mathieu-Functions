@@ -99,7 +99,7 @@ class mathieu_functions:
 
 def A_coefficients(q, N, type, period):
     vals = {}
-    if q[0].imag != 0:
+    if q.imag.any() != 0:
         imag = True
     else:
         imag = False
@@ -176,6 +176,7 @@ def Fcoeffs(As, n=0, q=0.00001, flag=False):
     # Estimate limiting value for small q (pos or neg) and correct.
     if flag is True:
         q = q * (1j)
+        As = cCoeffs(As, n)
     else:
         for k in range(len(As[0, :])):
             if n == 0:
@@ -255,7 +256,29 @@ def coeffs(q, r, n):
     return coeff
 
 
-def Anorm(A, type='even', period='one'):
+def cCoeffs(A, n, q=1):
+    '''Correct the behavior of the Fourier coefficients as a function of
+    parameter (purely imaginary). The Fourier coefficients are complex.
+    Input:
+        A: nd-array. Fourier coefficients (eigenvector) with real and imaginary
+            components.
+        n: int, index of the eigenvector -> n associated with ce_{2n}
+        q: complex, value of the parameter. For now assumed to span values
+            before the second branch point q<16i.
+    Output:
+        A: nd-array. Corrected Fourier coefficient.
+    '''
+    N = len(A[0, :])
+    if n >= 2:
+        if n == 2:
+            A[:, 0].real = -A[:, 0].real
+        A[:, n - 1].imag = abs(A[:, n - 1].imag)
+        if n < (N - 1):
+            A[:, n + 1].imag = -abs(A[:, n + 1].imag)
+    return A
+
+
+def Anorm(A, type='even', period='one', flag=True):
     """ Normalization of eigenvectors in accordance to Mathieu functions.
     Default is for that associated with ce_{2n}(q, z).
     Input:
