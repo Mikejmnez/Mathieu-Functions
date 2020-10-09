@@ -268,13 +268,12 @@ def cCoeffs(A, n, q=1):
     Output:
         A: nd-array. Corrected Fourier coefficient.
     '''
-    N = len(A[0, :])
-    if n >= 2:
-        if n == 2:
-            A[:, 0].real = -A[:, 0].real
-        A[:, n - 1].imag = abs(A[:, n - 1].imag)
-        if n < (N - 1):
-            A[:, n + 1].imag = -abs(A[:, n + 1].imag)
+    bpoint = [1.46, 16]  # first two branch points
+    A[0] = 
+    if q < bpoint[0]:
+        if _np.sign(A[0]) != _np.sign((1j) * n):
+            A[0] = -A[0]
+
     return A
 
 
