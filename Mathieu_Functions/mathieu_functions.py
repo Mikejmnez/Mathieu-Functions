@@ -1,7 +1,7 @@
 """
 defines a class where the Mathieu functions ce and se are defined.
 """
-from eig_system import matrix_system, eig_pairs, pseudo_inverse
+from eig_system import matrix_system, eig_pairs
 from math import factorial
 import numpy as _np
 
@@ -269,10 +269,10 @@ def cCoeffs(A, n, q=1):
         A: nd-array. Corrected Fourier coefficient.
     '''
     bpoint = [1.46, 16]  # first two branch points
-    A[0] = 
-    if q < bpoint[0]:
-        if _np.sign(A[0]) != _np.sign((1j) * n):
-            A[0] = -A[0]
+    # A[0] = A[0]
+    # if q < bpoint[0]:
+    #     if _np.sign(A[0]) != _np.sign((1j) * n):
+    #         A[0] = -A[0]
 
     return A
 
