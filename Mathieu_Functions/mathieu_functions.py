@@ -138,7 +138,7 @@ def Fcoeffs(As, n=0, q=0.00001, flag=False):
     # Estimate limiting value for small q (pos or neg) and correct.
     if flag is True:
         q = q * (1j)
-        As = cCoeffs(As, n)
+        As = cCoeffs(As, n, q)
     else:
         for k in range(len(As[0, :])):
             if n == 0:
@@ -230,12 +230,11 @@ def cCoeffs(A, n, q=1):
     Output:
         A: nd-array. Corrected Fourier coefficient.
     '''
-    bpoint = [1.46, 16]  # first two branch points
-    # A[0] = A[0]
-    # if q < bpoint[0]:
-    #     if _np.sign(A[0]) != _np.sign((1j) * n):
-    #         A[0] = -A[0]
-
+    N = len(A[0, :])
+    if n >= 2:
+        A[:, n - 1].imag = abs(A[:, n - 1].imag)
+        if n < (N - 1):
+            A[:, n + 1].imag = -abs(A[:, n + 1].imag)
     return A
 
 
@@ -253,11 +252,11 @@ def Anorm(A, type='even', period='one', flag=True):
         # if flag is True:
         #     norm = 1
         # else:
-        A0star = _np.conjugate(A[0])
-        Astar = _np.conjugate(A[1:])
+        A0star = A[0]
+        Astar = A[1:]
         norm = _np.sqrt((2 * (A[0] * A0star)) + _np.sum(A[1:] * Astar))
     else:
-        norm = _np.sum(A * _np.conjugate(A))
+        norm = _np.sum(A ** 2)
     A = A / norm
     return A
 
