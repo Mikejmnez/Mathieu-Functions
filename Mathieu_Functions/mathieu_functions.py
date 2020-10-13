@@ -114,7 +114,7 @@ def A_coefficients(q, N, type, period):
             nA = Anorm(A[:, n], type, period)
             nAs = nA[_np.newaxis, :]
             As = _np.append(As, nAs, axis=0)
-        As = Fcoeffs(As, n, flag=imag)
+        As = Fcoeffs(As, n, q, flag=imag)
         vals.update({'a' + str(2 * n): _np.array(a)})
         vals.update({'A' + str(2 * n): As})
     return vals
@@ -124,22 +124,24 @@ def Fcoeffs(As, n=0, q=0.00001, flag=False):
     """ Returns the Fourier coefficient of the Mathieu functions for given
     parameter q. Makes sure the coefficients are continuous (in q). Numerical
     routines for estimating eigenvectors might converge in different signs
-    for the eigenvectors for different (neighboring) values of q.
+    for the eigenvectors for different (neighboring) values of q. In case where
+    q is purely imaginary, eigenvectors need to be rotated, so that these
+    satisfy certain relations across branch points.
         Input:
             As: 2d array. Eigenvector shape(As)=Nq, N, as a function of q and
                 containing N entries, each associated with a Fourier
                 coefficient.
             n: int. Eigenvalue index. If n=0, eigenvalue is a0. n=1, eigenvalue
             is a2.
-            q: float, real or imag. Default is q=0.01, real. Must be small.
+            q: array, real or imag. Default is q=0.00001, real.
         Output:
             Corrected Eigenvector with same shape as original
     """
     # Estimate limiting value for small q (pos or neg) and correct.
     if flag is True:
-        q = q * (1j)
         As = cCoeffs(As, n, q)
     else:
+        q = 0.00001
         for k in range(len(As[0, :])):
             if n == 0:
                 limA = coeff0(q, k)  # q~0 value for each entry of eig-vector.
@@ -218,7 +220,7 @@ def coeffs(q, r, n):
     return coeff
 
 
-def cCoeffs(A, n, q=1):
+def cCoeffs(A, n, q):
     '''Correct the behavior of the Fourier coefficients as a function of
     parameter (purely imaginary). The Fourier coefficients are complex.
     Input:
@@ -230,11 +232,33 @@ def cCoeffs(A, n, q=1):
     Output:
         A: nd-array. Corrected Fourier coefficient.
     '''
+    qs = [1.4687, 16.2]  # location of first 3 branch points.
     N = len(A[0, :])
+    if n < 2:
+        ll = _np.where(q.imag <= qs[0])[0]
+        if n == 0:
+            for k in range(N):  # make sure F coeffs are continuous across EPs
+                if k % 2 == 0:  # even, purely real before EPs
+                    As = A[ll[-1], k].real
+                    if _np.sign(As) != _np.sign(A[ll[-1] + 1, k].real):
+                        A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
+                else:  # odd, purely imag
+                    As = A[ll[-1], k].imag
+                    if _np.sign(As) != _np.sign(A[ll[-1] + 10, k].imag):
+                        A[ll[-1] + 1:, k].imag = - A[ll[-1] + 1:, k].imag
+            A[ll[-1] + 1:, 0].imag = -A[ll[-1] + 1:, 0].imag  # flips sign
+            A[ll[-1] + 1:, 1].real = -A[ll[-1] + 1:, 1].real
+            A[ll[-1] + 1:, 2].imag = -A[ll[-1] + 1:, 2].imag
+            A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
+        # if n == 1:
+            # A[ll[-1] + 1:, 3].imag = - A[ll[-1] + 1:, 3].imag
+            # A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
     if n >= 2:
+        # A[:, 0].real = -A[:, 0].real
         A[:, n - 1].imag = abs(A[:, n - 1].imag)
         if n < (N - 1):
             A[:, n + 1].imag = -abs(A[:, n + 1].imag)
+
     return A
 
 
