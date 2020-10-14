@@ -235,24 +235,22 @@ def cCoeffs(A, n, q):
     qs = [1.4687, 16.2]  # location of first 3 branch points.
     N = len(A[0, :])
     if n < 2:
-        ll = _np.where(q.imag <= qs[0])[0]
-        if n == 0:
-            for k in range(N):  # make sure F coeffs are continuous across EPs
-                if k % 2 == 0:  # even, purely real before EPs
-                    As = A[ll[-1], k].real
-                    if _np.sign(As) != _np.sign(A[ll[-1] + 1, k].real):
-                        A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
-                else:  # odd, purely imag
-                    As = A[ll[-1], k].imag
-                    if _np.sign(As) != _np.sign(A[ll[-1] + 10, k].imag):
-                        A[ll[-1] + 1:, k].imag = - A[ll[-1] + 1:, k].imag
-            A[ll[-1] + 1:, 0].imag = -A[ll[-1] + 1:, 0].imag  # flips sign
-            A[ll[-1] + 1:, 1].real = -A[ll[-1] + 1:, 1].real
-            A[ll[-1] + 1:, 2].imag = -A[ll[-1] + 1:, 2].imag
-            A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
-        # if n == 1:
-            # A[ll[-1] + 1:, 3].imag = - A[ll[-1] + 1:, 3].imag
-            # A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
+        if q.imag[-1] > qs[0]:
+            ll = _np.where(q.imag <= qs[0])[0]
+            if n == 0:
+                for k in range(N):  # make sure F coeffs are continuous across
+                    if k % 2 == 0:  # even, purely real before EPs
+                        As = A[ll[-1], k].real
+                        if _np.sign(As) != _np.sign(A[ll[-1] + 1, k].real):
+                            A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
+                    else:  # odd, purely imag
+                        As = A[ll[-1], k].imag
+                        if _np.sign(As) != _np.sign(A[ll[-1] + 10, k].imag):
+                            A[ll[-1] + 1:, k].imag = - A[ll[-1] + 1:, k].imag
+                A[ll[-1] + 1:, 0].imag = -A[ll[-1] + 1:, 0].imag  # flips sign
+                A[ll[-1] + 1:, 1].real = -A[ll[-1] + 1:, 1].real
+                A[ll[-1] + 1:, 2].imag = -A[ll[-1] + 1:, 2].imag
+                A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
     if n >= 2:
         # A[:, 0].real = -A[:, 0].real
         A[:, n - 1].imag = abs(A[:, n - 1].imag)
