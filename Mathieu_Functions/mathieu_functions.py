@@ -251,7 +251,7 @@ def cCoeffs(A, n, q):
                 A[ll[-1] + 1:, 5].real = -A[ll[-1] + 1:, 5].real
                 A[ll[-1] + 1:, 6].imag = -A[ll[-1] + 1:, 6].imag
                 A[ll[-1] + 1:, 7].real = -A[ll[-1] + 1:, 7].real
-    if n >= 2:
+    if n in [2, 3]:
         if q.imag[-1] > qs[1]:
             ll = _np.where(q.imag <= qs[1])[0]
             if n == 2:  # A^(4)
