@@ -239,32 +239,22 @@ def cCoeffs(A, n, q):
             ll = _np.where(q.imag <= qs[0])[0]
             if n == 0:
                 for k in range(N):  # make sure F coeffs are continuous across
-                    if k % 2 == 0:  # even, purely real before EPs
-                        A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
-                    else:  # odd, purely imag
-                        A[ll[-1] + 1:, k].imag = - A[ll[-1] + 1:, k].imag
-                A[ll[-1] + 1:, 0].imag = -A[ll[-1] + 1:, 0].imag  # flips sign
-                A[ll[-1] + 1:, 1].real = -A[ll[-1] + 1:, 1].real
-                A[ll[-1] + 1:, 2].imag = -A[ll[-1] + 1:, 2].imag
-                A[ll[-1] + 1:, 3].real = -A[ll[-1] + 1:, 3].real
-                A[ll[-1] + 1:, 4].imag = -A[ll[-1] + 1:, 4].imag
-                A[ll[-1] + 1:, 5].real = -A[ll[-1] + 1:, 5].real
-                A[ll[-1] + 1:, 6].imag = -A[ll[-1] + 1:, 6].imag
-                A[ll[-1] + 1:, 7].real = -A[ll[-1] + 1:, 7].real
+                    A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
     if n in [2, 3]:
         if q.imag[-1] > qs[1]:
             ll = _np.where(q.imag <= qs[1])[0]
             if n == 2:  # A^(4)
                 for k in range(N):
-                    if k % 2 == 0:  # even
-                        A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
-                    else:
-                        A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
-                A[ll[-1] + 1:, 1].imag = -A[ll[-1] + 1:, 1].imag
-                A[ll[-1] + 1:, 3].imag = -A[ll[-1] + 1:, 3].imag
-                A[ll[-1] + 1:, 5].imag = -A[ll[-1] + 1:, 5].imag
-                A[ll[-1] + 1:, 7].imag = -A[ll[-1] + 1:, 7].imag
-                A[ll[-1] + 1:, 9].imag = -A[ll[-1] + 1:, 9].imag
+                    A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
+                #     if k % 2 == 0:  # even
+                #         A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
+                #     else:
+                #         A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
+                # A[ll[-1] + 1:, 1].imag = -A[ll[-1] + 1:, 1].imag
+                # A[ll[-1] + 1:, 3].imag = -A[ll[-1] + 1:, 3].imag
+                # A[ll[-1] + 1:, 5].imag = -A[ll[-1] + 1:, 5].imag
+                # A[ll[-1] + 1:, 7].imag = -A[ll[-1] + 1:, 7].imag
+                # A[ll[-1] + 1:, 9].imag = -A[ll[-1] + 1:, 9].imag
     if n in [4, 5]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
