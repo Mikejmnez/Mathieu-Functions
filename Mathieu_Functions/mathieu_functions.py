@@ -260,17 +260,11 @@ def cCoeffs(A, n, q):
                         A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
                     else:
                         A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
+                A[ll[-1] + 1:, 1].imag = -A[ll[-1] + 1:, 1].imag
+                A[ll[-1] + 1:, 3].imag = -A[ll[-1] + 1:, 3].imag
                 A[ll[-1] + 1:, 5].imag = -A[ll[-1] + 1:, 5].imag
                 A[ll[-1] + 1:, 7].imag = -A[ll[-1] + 1:, 7].imag
                 A[ll[-1] + 1:, 9].imag = -A[ll[-1] + 1:, 9].imag
-# =========
-# fix before banch point behavior
-# =========
-                A[:ll[-1] + 1, 1] = - A[:ll[-1] + 1, 1]
-                A[:ll[-1] + 1, 3] = -A[:ll[-1] + 1, 3]
-            if n == 3:
-                A[ll[-1] + 1:, 1].imag = -A[ll[-1] + 1:, 1].imag
-                A[ll[-1] + 1:, 3].imag = -A[ll[-1] + 1:, 3].imag
     if n in [4, 5]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
