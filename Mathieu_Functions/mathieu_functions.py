@@ -246,15 +246,6 @@ def cCoeffs(A, n, q):
             if n == 2:  # A^(4)
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
-                #     if k % 2 == 0:  # even
-                #         A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
-                #     else:
-                #         A[ll[-1] + 1:, k].real = - A[ll[-1] + 1:, k].real
-                # A[ll[-1] + 1:, 1].imag = -A[ll[-1] + 1:, 1].imag
-                # A[ll[-1] + 1:, 3].imag = -A[ll[-1] + 1:, 3].imag
-                # A[ll[-1] + 1:, 5].imag = -A[ll[-1] + 1:, 5].imag
-                # A[ll[-1] + 1:, 7].imag = -A[ll[-1] + 1:, 7].imag
-                # A[ll[-1] + 1:, 9].imag = -A[ll[-1] + 1:, 9].imag
     if n in [4, 5]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
