@@ -268,6 +268,12 @@ def cCoeffs(A, n, q):
         A[:, n - 1].imag = abs(A[:, n - 1].imag)
         if n < (N - 1):
             A[:, n + 1].imag = -abs(A[:, n + 1].imag)
+    if n in [4, 5]:
+        if q.imag[-1] > qs[2]:
+            ll = _np.where(q.imag <= qs[2])[0]
+            if n == 4:  # ce8
+                for k in range(N):
+                    A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
     return A
 
 
