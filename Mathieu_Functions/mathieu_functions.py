@@ -232,7 +232,7 @@ def cCoeffs(A, n, q):
     Output:
         A: nd-array. Corrected Fourier coefficient.
     '''
-    qs = [1.4687, 16.471]  # location of first 3 branch points.
+    qs = [1.468768, 16.4711, 47.8059]  # from Blanch and Clemm, (1969)
     N = len(A[0, :])
     if n < 2:
         if q.imag[-1] > qs[0]:
