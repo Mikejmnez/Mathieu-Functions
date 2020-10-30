@@ -232,7 +232,7 @@ def cCoeffs(A, n, q):
     Output:
         A: nd-array. Corrected Fourier coefficient.
     '''
-    qs = [1.468768, 16.4711, 47.8059]  # from Blanch and Clemm, (1969)
+    qs = [1.468768, 16.4711, 47.8059, 95.4752]  # from Blanch and Clemm, (1969)
     N = len(A[0, :])
     if n < 2:
         if q.imag[-1] > qs[0]:
@@ -252,6 +252,9 @@ def cCoeffs(A, n, q):
             if n == 4:  # ce8
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
+    if q.imag[-1] >= qs[-1]:
+        raise ValueError("Not yet implemented for values of Mathieu`s"
+                         "canonical parameter q>95i")
     return A
 
 
