@@ -231,6 +231,12 @@ def cCoeffs(A, n, q):
             before the second branch point q<16i.
     Output:
         A: nd-array. Corrected Fourier coefficient.
+
+    NOTE: Not bulletproof. For values of q>60i, coefficients of ce4 flip sign.
+    Also, the greater resolution on q, the greater likeliness that at the
+    exceptional point the sign is incorrect. This is because the theoretical
+    (Blanch and Clemm 69) and the calculated exceptional point are not equal,
+    but very close.
     '''
     qs = [1.468768, 16.4711, 47.8059, 95.4752]  # from Blanch and Clemm, (1969)
     N = len(A[0, :])
@@ -238,18 +244,18 @@ def cCoeffs(A, n, q):
         if q.imag[-1] > qs[0]:
             ll = _np.where(q.imag <= qs[0])[0]
             if n == 0:
-                for k in range(N):  # make sure F coeffs are continuous across
+                for k in range(N):
                     A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
     if n in [2, 3]:
         if q.imag[-1] > qs[1]:
             ll = _np.where(q.imag <= qs[1])[0]
-            if n == 2:  # A^(4)
+            if n == 2:
                 for k in range(N):
-                    A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
+                    A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
     if n in [4, 5]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
-            if n == 4:  # ce8
+            if n == 4:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
     if q.imag[-1] >= qs[-1]:
