@@ -252,12 +252,16 @@ def cCoeffs(A, n, q):
             if n == 2:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
+                mm = _np.where(A[:, 0].real > 0)[0]  # never changes sign
+                A[mm, :] = -A[mm, :]
     if n in [4, 5]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
             if n == 4:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
+                mm = _np.where(A[:, 0].real > 0)[0]  # never changes sign
+                A[mm, :] = -A[mm, :]
     # if q.imag[-1] >= qs[-1]:
     #     raise ValueError("Not yet implemented for values of Mathieu`s"
     #                      "canonical parameter q>95i")
