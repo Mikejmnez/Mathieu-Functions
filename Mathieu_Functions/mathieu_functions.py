@@ -260,7 +260,7 @@ def cCoeffs(A, n, q):
             if n == 4:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
-                mm = _np.where(A[:, 0].real > 0)[0]  # never changes sign
+                mm = _np.where(A[:, 0].real < 0)[0]  # always positive
                 A[mm, :] = -A[mm, :]
     # if q.imag[-1] >= qs[-1]:
     #     raise ValueError("Not yet implemented for values of Mathieu`s"
