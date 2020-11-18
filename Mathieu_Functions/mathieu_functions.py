@@ -258,9 +258,9 @@ def cCoeffs(A, n, q):
             if n == 4:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
-    if q.imag[-1] >= qs[-1]:
-        raise ValueError("Not yet implemented for values of Mathieu`s"
-                         "canonical parameter q>95i")
+    # if q.imag[-1] >= qs[-1]:
+    #     raise ValueError("Not yet implemented for values of Mathieu`s"
+    #                      "canonical parameter q>95i")
     return A
 
 
