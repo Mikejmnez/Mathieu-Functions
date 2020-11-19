@@ -240,7 +240,8 @@ def cCoeffs(A, n, q):
     '''
     qs = [1.466466, 16.466466,
           47.797797, 95.4654654,
-          159.469469, 239.809809]
+          159.469469, 239.809809,
+          336.468468, 452.972972]
     N = len(A[0, :])
     if n < 2 and q[0].imag < qs[0]:
         if q.imag[-1] > qs[0]:
@@ -288,9 +289,39 @@ def cCoeffs(A, n, q):
                 A[mm, :] = -A[mm, :]
             if n == 9:
                 for k in range(N):
-                    As = abs(A[:ll[-1], k])  # before EP
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
                     sign = (1j)**(n - k)  # before EP
-                    A[:ll[-1], k] = sign * As  # Before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+    if n in [10, 11] and q[0].imag < qs[5]:
+        if q[-1].imag > qs[5]:
+            ll = _np.where(q.imag <= qs[5])[0]
+            if n == 10:
+                mm = _np.where(A[:, 0].real > 0)[0]  # always negative
+                A[mm, :] = -A[mm, :]
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+            if n == 11:
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+    if n in [12, 13] and q[0].imag < qs[6]:
+        if q[-1].imag > qs[6]:
+            ll = _np.where(q.imag <= qs[6])[0]
+            if n == 12:
+                mm = _np.where(A[:, 0].real < 0)[0]  # always positive
+                A[mm, :] = -A[mm, :]
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+            if n == 13:
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
     # if q.imag[-1] >= qs[-1]:
     #     raise ValueError("Not yet implemented for values of Mathieu`s"
     #                      "canonical parameter q>95i")
