@@ -238,15 +238,17 @@ def cCoeffs(A, n, q):
     (Blanch and Clemm 69) and the calculated exceptional point are not equal,
     but very close.
     '''
-    qs = [1.468768, 16.4711, 47.8059, 95.4752]  # from Blanch and Clemm, (1969)
+    qs = [1.466466, 16.466466,
+          47.797797, 95.4654654,
+          159.469469, 239.809809]
     N = len(A[0, :])
-    if n < 2:
+    if n < 2 and q[0].imag < qs[0]:
         if q.imag[-1] > qs[0]:
             ll = _np.where(q.imag <= qs[0])[0]
             if n == 0:
                 for k in range(N):
                     A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
-    if n in [2, 3]:
+    if n in [2, 3] and q[0].imag < qs[1]:
         if q.imag[-1] > qs[1]:
             ll = _np.where(q.imag <= qs[1])[0]
             if n == 2:
@@ -254,7 +256,7 @@ def cCoeffs(A, n, q):
                     A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
                 mm = _np.where(A[:, 0].real > 0)[0]  # never changes sign
                 A[mm, :] = -A[mm, :]
-    if n in [4, 5]:
+    if n in [4, 5] and q[0].imag < qs[2]:
         if q.imag[-1] > qs[2]:
             ll = _np.where(q.imag <= qs[2])[0]
             if n == 4:
@@ -262,6 +264,33 @@ def cCoeffs(A, n, q):
                     A[ll[-1] + 1:, k] = - A[ll[-1] + 1:, k]
                 mm = _np.where(A[:, 0].real < 0)[0]  # always positive
                 A[mm, :] = -A[mm, :]
+    if n in [6, 7] and q[0].imag < qs[3]:
+        if q.imag[-1] > qs[3]:
+            ll = _np.where(q.imag <= qs[3])[0]
+            if n == 6:
+                mm = _np.where(A[:, 0].real > 0)[0]  # always negative
+                A[mm, :] = -A[mm, :]
+            if n == 7:
+                for k in range(N):
+                    As = A[ll[-1] - 1, k]
+                    for m in _np.arange(ll[-1], ll[-1] + 2):
+                        if k % 2 == 0:
+                            if _np.sign(A[m, k].imag) != _np.sign(As.imag):
+                                A[m, k] = -A[m, k]
+                        else:
+                            if _np.sign(A[m, k].real) != _np.sign(As.real):
+                                A[m, k] = -A[m, k]
+    if n in [8, 9] and q[0].imag < qs[4]:
+        if q[-1].imag > qs[4]:
+            ll = _np.where(q.imag <= qs[4])[0]
+            if n == 8:
+                mm = _np.where(A[:, 0].real < 0)[0]  # always positive
+                A[mm, :] = -A[mm, :]
+            if n == 9:
+                for k in range(N):
+                    As = abs(A[:ll[-1], k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1], k] = sign * As  # Before EP
     # if q.imag[-1] >= qs[-1]:
     #     raise ValueError("Not yet implemented for values of Mathieu`s"
     #                      "canonical parameter q>95i")
