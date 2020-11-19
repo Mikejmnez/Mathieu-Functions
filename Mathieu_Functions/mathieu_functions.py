@@ -322,6 +322,23 @@ def cCoeffs(A, n, q):
                     As = abs(A[:ll[-1] + 1, k])  # before EP
                     sign = (1j)**(n - k)  # before EP
                     A[:ll[-1] + 1, k] = sign * As  # Before EP
+    if n in [14, 15] and q[0].imag < qs[7]:
+        if q[-1].imag > qs[7]:
+            ll = _np.where(q.imag <= qs[7])[0]
+            if n == 14:
+                mm = _np.where(A[:, 0].real > 0)[0]  # always negative
+                A[mm, :] = -A[mm, :]
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+            if n == 15:
+                mm = _np.where(A[:, 0].real > 0)[0]  # always negative
+                A[mm, :] = -A[mm, :]
+                for k in range(N):
+                    As = abs(A[:ll[-1] + 1, k])  # before EP
+                    sign = (1j)**(n - k)  # before EP
+                    A[:ll[-1] + 1, k] = sign * As  # Before EP
     # if q.imag[-1] >= qs[-1]:
     #     raise ValueError("Not yet implemented for values of Mathieu`s"
     #                      "canonical parameter q>95i")
