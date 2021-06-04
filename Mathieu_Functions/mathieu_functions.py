@@ -249,8 +249,12 @@ def cCoeffs(A, n, q):
         if q.imag[-1] > qs[0]:
             ll = _np.where(q.imag <= qs[0])[0]
             if n == 0:
+                nn = _np.where(A[:ll[-1], n] < 0)[0]  # should be > 0.
+                A[nn, :] = - A[nn, :]
                 for k in range(N):
                     A[ll[-1] + 1:, k] = -A[ll[-1] + 1:, k]
+                mm = _np.where(A[:, 0].real < 0)[0]  # never changes sign
+                A[mm, :] = -A[mm, :]
     if n in [2, 3] and q[0].imag < qs[1]:
         if q.imag[-1] > qs[1]:
             ll = _np.where(q.imag <= qs[1])[0]
@@ -328,23 +332,29 @@ def cCoeffs(A, n, q):
         if q[-1].imag > qs[7]:
             ll = _np.where(q.imag <= qs[7])[0]
             if n == 14:
+                nn = _np.where(A[:ll[-1], n] < 0)[0]  # should be > 0.
+                A[nn, :] = - A[nn, :]
                 mm = _np.where(A[:, 0].real > 0)[0]  # always negative
                 A[mm, :] = -A[mm, :]
-                for k in range(N):
-                    As = abs(A[:ll[-1] + 1, k])  # before EP
-                    sign = (1j)**(n - k)  # before EP
-                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+                # for k in range(N):
+                #     As = abs(A[:ll[-1] + 1, k])  # before EP
+                #     sign = (1j)**(n - k)  # before EP
+                #     A[:ll[-1] + 1, k] = sign * As  # Before EP
             if n == 15:
+                nn = _np.where(A[:ll[-1], n] < 0)[0]  # should be > 0.
+                A[nn, :] = - A[nn, :]
                 mm = _np.where(A[:, 0].real > 0)[0]  # always negative
                 A[mm, :] = -A[mm, :]
-                for k in range(N):
-                    As = abs(A[:ll[-1] + 1, k])  # before EP
-                    sign = (1j)**(n - k)  # before EP
-                    A[:ll[-1] + 1, k] = sign * As  # Before EP
+                # for k in range(N):
+                #     As = abs(A[:ll[-1] + 1, k])  # before EP
+                #     sign = (1j)**(n - k)  # before EP
+                #     A[:ll[-1] + 1, k] = sign * As  # Before EP
     if n in [16, 17] and q[0].imag < qs[8]:
         if q[-1].imag > qs[8]:
             ll = _np.where(q.imag <= qs[8])[0]
             if n == 16:
+                nn = _np.where(A[:ll[-1], n] < 0)[0]  # should be > 0.
+                A[nn, :] = - A[nn, :]
                 mm = _np.where(A[:, 0].real < 0)[0]  # always positive
                 A[mm, :] = -A[mm, :]
                 for k in range(N):
